@@ -70,7 +70,7 @@ class Feed
         $xmlService = new SabreXmlService();
 
         $namespace = '{'.static::GOOGLE_MERCHANT_XML_NAMESPACE.'}';
-        $xmlService->namespaceMap[static::GOOGLE_MERCHANT_XML_NAMESPACE] = '';
+        $xmlService->namespaceMap[static::GOOGLE_MERCHANT_XML_NAMESPACE] = 'g';
 
         $xmlStructure = array('channel' => array());
 
