@@ -1,0 +1,21 @@
+{
+  "name": "vitalybaev/google-merchant-feed",
+  "description": "PHP package for creating Google Merchant products feed",
+  "keywords": ["google", "merchant", "feed"],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Vitaly Baev",
+      "email": "dj@vitalybaev.ru"
+    }
+  ],
+  "require": {
+    "php": ">=5.5",
+    "sabre/xml": "^1.5"
+  },
+  "autoload": {
+    "psr-4": {
+      "Vitalybaev\\GoogleMerchant\\": "src/"
+    }
+  }
+}
