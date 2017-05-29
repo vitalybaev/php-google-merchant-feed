@@ -51,6 +51,16 @@ class Feed
     }
 
     /**
+     * Adds product to feed.
+     *
+     * @param $product
+     */
+    public function addProduct($product)
+    {
+        $this->items[] = $product;
+    }
+
+    /**
      * Generate string representation of this feed.
      *
      * @return string
