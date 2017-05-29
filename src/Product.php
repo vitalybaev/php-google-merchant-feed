@@ -312,7 +312,7 @@ class Product
         foreach ($this->attributes as $attribute) {
             $value = $attribute->isCData() ? new Cdata($attribute->getValue()) : $attribute->getValue();
             $xmlStructure['item'][] = [
-                'name' => $namespace . 'description',
+                'name' => $namespace . $attribute->getName(),
                 'value' => $value,
             ];
         }
