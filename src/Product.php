@@ -184,7 +184,20 @@ class Product
      */
     public function setGoogleCategory($category)
     {
-        $this->setAttribute('google_​product_​category', $category, false);
+        $this->setAttribute('google_product_category', $category, false);
+        return $this;
+    }
+    
+    /**
+     * Sets Google product_type of the product.
+     *
+     * @param string product_type
+     *
+     * @return $this
+     */
+    public function setProductType($product_type)
+    {
+        $this->setAttribute('product_type', $product_type, false);
         return $this;
     }
 

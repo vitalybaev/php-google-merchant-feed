@@ -1,5 +1,15 @@
 # Google Merchant feed generator for PHP
 
+
+## Installation
+
+Install the package through [Composer](http://getcomposer.org/). 
+
+Run the Composer require command from the Terminal:
+
+    composer require vitalybaev/google-merchant-feed
+
+
 ## Example
 
 ```php
