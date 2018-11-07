@@ -126,7 +126,7 @@ class Product
      */
     public function setAdditionalImage($imageUrl)
     {
-        $this->setAttribute('additional_​image_​link', $imageUrl, true);
+        $this->setAttribute('additional_image_link', $imageUrl, true);
         return $this;
     }
 
