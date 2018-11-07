@@ -241,6 +241,24 @@ class Product
     }
 
     /**
+     * Sets identifier_exists code of the product. (yes / no)
+     *
+     * @param string $identifierExists
+     *
+     * @return $this
+     * @throws InvalidArgumentException
+     */
+    public function setIdentifierExists($identifierExists)
+    {
+        $identifierExists = strtolower($identifierExists);
+        if (!in_array($identifierExists, ['yes', 'no'])) {
+            throw new InvalidArgumentException("identifier_exists property should be one of 'yes' or 'no'");
+        }
+        $this->setAttribute('identifier_exists', $identifierExists, false);
+        return $this;
+    }
+
+    /**
      * Sets condition of the product.
      *
      * @param string $condition
