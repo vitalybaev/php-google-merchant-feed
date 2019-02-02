@@ -54,6 +54,12 @@ $feedXml = $feed->build();
 
 ```
 
+## Working with attributes
+`Product` class provides several methods for managing various attributes. But it doesn't cover all Google Merchant attributes. In case of nonexistent methods you should use one of the following:
+
+1. `$product->setAttribute($attributeName, $attributeValue, $isCData = false)` - sets attribute. Replaces old attribute if it existed. 
+2. `$product->addAttribute($attributeName, $attributeValue, $isCData = false)` - adds one more attribute's value. For example feed can have multiple `additional_image_link` attributes.
+
 ## TO-DO
 * Cover all Google Merchant feed properties
 * Write tests

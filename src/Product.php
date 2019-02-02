@@ -17,7 +17,7 @@ class Product
     private $attributes = [];
 
     /**
-     * Sets attribute.
+     * Sets attribute. If attribute is already exist, it would be overwritten.
      *
      * @param string $name
      * @param string $value
@@ -28,14 +28,35 @@ class Product
     public function setAttribute($name, $value, $isCData = false)
     {
         $productProperty = new ProductProperty($name, $value, $isCData);
-        foreach ($this->attributes as $index => $attribute) {
-            if (mb_strtolower($name) == mb_strtolower($attribute->getName())) {
-                $this->attributes[$index] = $productProperty;
-                return $this;
-            }
+        $this->attributes[strtolower($name)] = $productProperty;
+
+        return $this;
+    }
+
+    /**
+     * Adds attribute. Doesn't overwrite previous attributes.
+     *
+     * @param      $name
+     * @param      $value
+     * @param bool $isCData
+     *
+     * @return Product
+     */
+    public function addAttribute($name, $value, $isCData = false)
+    {
+        $productProperty = new ProductProperty($name, $value, $isCData);
+        $attributeName = strtolower($name);
+        if (!isset($this->attributes[$attributeName])) {
+            $this->attributes[$attributeName] = [$productProperty];
+            return $this;
         }
 
-        $this->attributes[] = $productProperty;
+        if (!is_array($this->attributes[$attributeName])) {
+            $this->attributes[$attributeName] = [$this->attributes[$attributeName], $productProperty];
+            return $this;
+        }
+
+        $this->attributes[$attributeName][] = $productProperty;
         return $this;
     }
 
@@ -131,6 +152,19 @@ class Product
     }
 
     /**
+     * Sets additional image of the product.
+     *
+     * @param string $imageUrl
+     *
+     * @return $this
+     */
+    public function addAdditionalImage($imageUrl)
+    {
+        $this->addAttribute('additional_image_link', $imageUrl, true);
+        return $this;
+    }
+
+    /**
      * Sets availability of the product.
      *
      * @param string $availability
@@ -187,7 +221,7 @@ class Product
         $this->setAttribute('google_product_category', $category, false);
         return $this;
     }
-    
+
     /**
      * Sets Google product_type of the product.
      *
@@ -340,12 +374,15 @@ class Product
             'item' => array(),
         );
 
-        foreach ($this->attributes as $attribute) {
-            $value = $attribute->isCData() ? new Cdata($attribute->getValue()) : $attribute->getValue();
-            $xmlStructure['item'][] = [
-                'name' => $namespace . $attribute->getName(),
-                'value' => $value,
-            ];
+        foreach ($this->attributes as $attributeItem) {
+            $attributes = is_array($attributeItem) ? $attributeItem : [$attributeItem];
+            foreach ($attributes as $attribute) {
+                $value = $attribute->isCData() ? new Cdata($attribute->getValue()) : $attribute->getValue();
+                $xmlStructure['item'][] = [
+                    'name' => $namespace . $attribute->getName(),
+                    'value' => $value,
+                ];
+            }
         }
 
         return $xmlStructure;

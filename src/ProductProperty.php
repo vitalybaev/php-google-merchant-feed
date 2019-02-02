@@ -28,7 +28,7 @@ class ProductProperty
      */
     public function __construct($name, $value, $isCData)
     {
-        $this->name = $name;
+        $this->name = strtolower($name);
         $this->value = $value;
         $this->isCData = $isCData;
     }
