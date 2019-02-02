@@ -62,7 +62,8 @@ $feedXml = $feed->build();
 
 ## TO-DO
 * Cover all Google Merchant feed properties
-* Write tests
+* More tests
+* Your feedback?
 
 ## License
 

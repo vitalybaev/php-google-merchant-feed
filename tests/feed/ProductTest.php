@@ -36,11 +36,30 @@ class ProductTest extends \PHPUnit\Framework\TestCase
         ], $product->getXmlStructure(static::PRODUCT_NAMESPACE));
     }
 
+    /**
+     * Tests adding multiple attributes values.
+     */
     public function testAddingAttribute()
     {
         $product = new \Vitalybaev\GoogleMerchant\Product();
 
         $product->addAttribute('additional_image_link', 'https://example.com/image1.jpg');
+        $this->assertEquals([
+            'item' => [
+                ['name' => "{http://base.google.com/ns/1.0}additional_image_link", "value" => "https://example.com/image1.jpg"],
+            ],
+        ], $product->getXmlStructure(static::PRODUCT_NAMESPACE));
+
+        $product->addAttribute('additional_image_link', 'https://example.com/image2.jpg');
+        $this->assertEquals([
+            'item' => [
+                ['name' => "{http://base.google.com/ns/1.0}additional_image_link", "value" => "https://example.com/image1.jpg"],
+                ['name' => "{http://base.google.com/ns/1.0}additional_image_link", "value" => "https://example.com/image2.jpg"],
+            ],
+        ], $product->getXmlStructure(static::PRODUCT_NAMESPACE));
+
+        $product = new \Vitalybaev\GoogleMerchant\Product();
+        $product->setAttribute('additional_image_link', 'https://example.com/image1.jpg');
         $this->assertEquals([
             'item' => [
                 ['name' => "{http://base.google.com/ns/1.0}additional_image_link", "value" => "https://example.com/image1.jpg"],
