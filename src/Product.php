@@ -293,7 +293,7 @@ class Product
     }
 
     /**
-     * Sets condition of the product.
+     * Sets condition of the product. `new`, `refurbished` or `used` are valid
      *
      * @param string $condition
      *
@@ -303,7 +303,7 @@ class Product
     public function setCondition($condition)
     {
         if (!in_array($condition, [
-            Condition::NEW, Condition::REFURBISHED, Condition::USED,
+            'new', 'refurbished', 'used',
         ])) {
             throw new InvalidArgumentException("Invalid condition property");
         }
