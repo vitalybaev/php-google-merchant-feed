@@ -1,5 +1,6 @@
 # Google Merchant feed generator for PHP
 
+[![Build Status](https://travis-ci.org/vitalybaev/php-google-merchant-feed.svg?branch=master)](https://travis-ci.org/vitalybaev/php-google-merchant-feed)
 
 ## Installation
 
@@ -15,7 +16,7 @@ Run the Composer require command from the Terminal:
 ```php
 use Vitalybaev\GoogleMerchant\Feed;
 use Vitalybaev\GoogleMerchant\Product;
-use Vitalybaev\GoogleMerchant\Product\Availability;
+use Vitalybaev\GoogleMerchant\Product\Availability\Availability;
 
 // Create feed object
 $feed = new Feed("My awesome store", "https://example.com", "My awesome description");
@@ -31,9 +32,9 @@ foreach ($products as $product) {
     $item->setLink($product->getUrl());
     $item->setImage($product->getImage());
     if ($product->isAvailable()) {
-        $feedProduct->setAvailability(Availability::IN_STOCK);
+        $item->setAvailability(Availability::IN_STOCK);
     } else {
-        $feedProduct->setAvailability(Availability::OUT_OF_STOCK);
+        $item->setAvailability(Availability::OUT_OF_STOCK);
     }
     $item->setPrice("{$product->price} USD");
     $item->setGoogleCategory($product->category_name);
