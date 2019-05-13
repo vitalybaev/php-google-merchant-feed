@@ -1,14 +1,15 @@
 language: php
 
 php:
-  - 7.0
-  - 7.1
-  - 7.2
+  - "7.0"
+  - "7.1"
+  - "7.2"
+  - "7.3"
 
 before_script:
   - composer self-update
   - composer install --no-interaction --prefer-source
-  - wget -O phpunit.phar https://phar.phpunit.de/phpunit-6.5.6.phar
+  - wget -O phpunit.phar https://phar.phpunit.de/phpunit-6.5.14.phar
 
 script:
   - php phpunit.phar --configuration ./phpunit.xml
