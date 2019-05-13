@@ -11,7 +11,7 @@
   ],
   "require": {
     "php": ">=5.5",
-    "sabre/xml": "^1.5"
+    "sabre/xml": "^1.5 || ^2.0"
   },
   "autoload": {
     "psr-4": {
