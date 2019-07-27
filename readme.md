@@ -16,6 +16,7 @@ Run the Composer require command from the Terminal:
 ```php
 use Vitalybaev\GoogleMerchant\Feed;
 use Vitalybaev\GoogleMerchant\Product;
+use Vitalybaev\GoogleMerchant\Product\Shipping;
 use Vitalybaev\GoogleMerchant\Product\Availability\Availability;
 
 // Create feed object
@@ -46,6 +47,16 @@ foreach ($products as $product) {
     $item->setColor($product->color);
     $item->setSize($product->size);
 
+    // Shipping info
+    $shipping = new Shipping();
+    $shipping->setCountry('US');
+    $shipping->setRegion('CA, NSW, 03');
+    $shipping->setPostalCode('94043');
+    $shipping->setLocationId('21137');
+    $shipping->setService('UPS Express');
+    $shipping->setPrice('1300 USD');
+    $item->setShipping($shipping);
+    
     // Add this product to the feed
     $feed->addProduct($item);
 }

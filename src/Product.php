@@ -2,63 +2,13 @@
 
 namespace Vitalybaev\GoogleMerchant;
 
-use Sabre\Xml\Element\Cdata;
 use Vitalybaev\GoogleMerchant\Exception\InvalidArgumentException;
 use Vitalybaev\GoogleMerchant\Product\Availability\Availability;
-use Vitalybaev\GoogleMerchant\Product\Condition;
+use Vitalybaev\GoogleMerchant\Product\Shipping;
 
 class Product
 {
-    /**
-     * Product's attributes
-     *
-     * @var ProductProperty[]
-     */
-    private $attributes = [];
-
-    /**
-     * Sets attribute. If attribute is already exist, it would be overwritten.
-     *
-     * @param string $name
-     * @param string $value
-     * @param bool   $isCData
-     *
-     * @return $this
-     */
-    public function setAttribute($name, $value, $isCData = false)
-    {
-        $productProperty = new ProductProperty($name, $value, $isCData);
-        $this->attributes[strtolower($name)] = $productProperty;
-
-        return $this;
-    }
-
-    /**
-     * Adds attribute. Doesn't overwrite previous attributes.
-     *
-     * @param      $name
-     * @param      $value
-     * @param bool $isCData
-     *
-     * @return Product
-     */
-    public function addAttribute($name, $value, $isCData = false)
-    {
-        $productProperty = new ProductProperty($name, $value, $isCData);
-        $attributeName = strtolower($name);
-        if (!isset($this->attributes[$attributeName])) {
-            $this->attributes[$attributeName] = [$productProperty];
-            return $this;
-        }
-
-        if (!is_array($this->attributes[$attributeName])) {
-            $this->attributes[$attributeName] = [$this->attributes[$attributeName], $productProperty];
-            return $this;
-        }
-
-        $this->attributes[$attributeName][] = $productProperty;
-        return $this;
-    }
+    use HasProperties;
 
     /**
      * Sets id of product.
@@ -364,6 +314,18 @@ class Product
     }
 
     /**
+     * @param Shipping $shipping
+     *
+     * @return $this
+     */
+    public function setShipping($shipping)
+    {
+        $propertyBag = $shipping->getPropertyBag()->setName('shipping');
+        $this->setAttribute('shipping', $propertyBag);
+        return $this;
+    }
+
+    /**
      * @param $namespace
      *
      * @return array
@@ -371,19 +333,8 @@ class Product
     public function getXmlStructure($namespace)
     {
         $xmlStructure = array(
-            'item' => array(),
+            'item' => $this->getPropertiesXmlStructure($namespace),
         );
-
-        foreach ($this->attributes as $attributeItem) {
-            $attributes = is_array($attributeItem) ? $attributeItem : [$attributeItem];
-            foreach ($attributes as $attribute) {
-                $value = $attribute->isCData() ? new Cdata($attribute->getValue()) : $attribute->getValue();
-                $xmlStructure['item'][] = [
-                    'name' => $namespace . $attribute->getName(),
-                    'value' => $value,
-                ];
-            }
-        }
 
         return $xmlStructure;
     }

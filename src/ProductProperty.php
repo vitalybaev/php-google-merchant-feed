@@ -2,6 +2,8 @@
 
 namespace Vitalybaev\GoogleMerchant;
 
+use Sabre\Xml\Element\Cdata;
+
 class ProductProperty
 {
     /**
@@ -44,13 +46,13 @@ class ProductProperty
     /**
      * @param string $name
      */
-    public function setName(string $name)
+    public function setName($name)
     {
         $this->name = $name;
     }
 
     /**
-     * @return string
+     * @return string|PropertyBag
      */
     public function getValue()
     {
@@ -60,7 +62,7 @@ class ProductProperty
     /**
      * @param string $value
      */
-    public function setValue(string $value)
+    public function setValue($value)
     {
         $this->value = $value;
     }
@@ -76,8 +78,23 @@ class ProductProperty
     /**
      * @param bool $isCData
      */
-    public function setIsCData(bool $isCData)
+    public function setIsCData($isCData)
     {
         $this->isCData = $isCData;
+    }
+
+    /**
+     * @param $namespace
+     *
+     * @return array
+     */
+    public function getXmlStructure($namespace)
+    {
+        $value = $this->isCData() ? new Cdata($this->getValue()) : $this->getValue();
+
+        return [
+            'name' => $namespace . $this->getName(),
+            'value' => $value,
+        ];
     }
 }

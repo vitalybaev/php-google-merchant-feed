@@ -2,7 +2,9 @@
 
 namespace Vitalybaev\GoogleMerchant\Exception;
 
-class InvalidArgumentException extends \Exception
+use Exception;
+
+class InvalidArgumentException extends Exception
 {
 
 }

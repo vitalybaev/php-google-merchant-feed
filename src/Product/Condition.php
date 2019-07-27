@@ -4,7 +4,7 @@ namespace Vitalybaev\GoogleMerchant\Product;
 
 class Condition
 {
-    const NEW = 'new';
+    const NEW_PRODUCT = 'new';
 
     const REFURBISHED = 'refurbished';
 

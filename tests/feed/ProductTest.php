@@ -1,6 +1,11 @@
 <?php
 
-class ProductTest extends \PHPUnit\Framework\TestCase
+use PHPUnit\Framework\TestCase;
+use Vitalybaev\GoogleMerchant\Feed;
+use Vitalybaev\GoogleMerchant\Product;
+use Vitalybaev\GoogleMerchant\Product\Shipping;
+
+class ProductTest extends TestCase
 {
     const PRODUCT_NAMESPACE = '{http://base.google.com/ns/1.0}';
 
@@ -9,7 +14,7 @@ class ProductTest extends \PHPUnit\Framework\TestCase
      */
     public function testSetAttribute()
     {
-        $product = new \Vitalybaev\GoogleMerchant\Product();
+        $product = new Product();
 
         // Set some value
         $product->setAttribute('attr', 'value', false);
@@ -41,7 +46,7 @@ class ProductTest extends \PHPUnit\Framework\TestCase
      */
     public function testAddingAttribute()
     {
-        $product = new \Vitalybaev\GoogleMerchant\Product();
+        $product = new Product();
 
         $product->addAttribute('additional_image_link', 'https://example.com/image1.jpg');
         $this->assertEquals([
@@ -58,7 +63,7 @@ class ProductTest extends \PHPUnit\Framework\TestCase
             ],
         ], $product->getXmlStructure(static::PRODUCT_NAMESPACE));
 
-        $product = new \Vitalybaev\GoogleMerchant\Product();
+        $product = new Product();
         $product->setAttribute('additional_image_link', 'https://example.com/image1.jpg');
         $this->assertEquals([
             'item' => [
@@ -80,7 +85,7 @@ class ProductTest extends \PHPUnit\Framework\TestCase
      */
     public function testProductSetsId()
     {
-        $product = new \Vitalybaev\GoogleMerchant\Product();
+        $product = new Product();
         $product->setId('some_id');
 
         $this->assertEquals([
@@ -88,5 +93,49 @@ class ProductTest extends \PHPUnit\Framework\TestCase
                 ['name' => "{http://base.google.com/ns/1.0}id", "value" => "some_id"],
             ],
         ], $product->getXmlStructure(static::PRODUCT_NAMESPACE));
+    }
+
+    /**
+     * Tests setting Id to product.
+     */
+    public function testProductShipping()
+    {
+        $shipping = new Shipping();
+        $shipping->setCountry('US');
+        $shipping->setRegion('CA, NSW, 03');
+        $shipping->setPostalCode('94043');
+        $shipping->setLocationId('21137');
+        $shipping->setService('UPS Express');
+        $shipping->setPrice('1300 USD');
+
+        $product = new Product();
+        $product->setShipping($shipping);
+
+        // Create feed object
+        $feed = new Feed("My awesome store", "https://example.com", "My awesome description");
+        $feed->addProduct($product);
+
+        $feedXml = $feed->build();
+        $expectedFeedXml = '<?xml version="1.0"?>
+<rss xmlns:g="http://base.google.com/ns/1.0">
+ <channel>
+  <title>My awesome store</title>
+  <link>https://example.com</link>
+  <description>My awesome description</description>
+  <item>
+   <g:shipping>
+    <g:country>US</g:country>
+    <g:region>CA, NSW, 03</g:region>
+    <g:postal_code>94043</g:postal_code>
+    <g:location_id>21137</g:location_id>
+    <g:service>UPS Express</g:service>
+    <g:price>1300 USD</g:price>
+   </g:shipping>
+  </item>
+ </channel>
+</rss>
+';
+
+        $this->assertEquals($expectedFeedXml, $feedXml);
     }
 }
