@@ -10,7 +10,11 @@ php:
 before_script:
   - composer self-update
   - composer install --no-interaction --prefer-source
-  - wget -O phpunit.phar https://phar.phpunit.de/phpunit-6.5.14.phar
+  - if [ $TRAVIS_PHP_VERSION = "5.6" ]; then wget -O phpunit.phar https://phar.phpunit.de/phpunit-5.phar ; fi
+  - if [ $TRAVIS_PHP_VERSION = "7.0" ]; then wget -O phpunit.phar https://phar.phpunit.de/phpunit-6.phar ; fi
+  - if [ $TRAVIS_PHP_VERSION = "7.1" ]; then wget -O phpunit.phar https://phar.phpunit.de/phpunit-7.phar ; fi
+  - if [ $TRAVIS_PHP_VERSION = "7.2" ]; then wget -O phpunit.phar https://phar.phpunit.de/phpunit-7.phar ; fi
+  - if [ $TRAVIS_PHP_VERSION = "7.3" ]; then wget -O phpunit.phar https://phar.phpunit.de/phpunit-7.phar ; fi
 
 script:
   - php phpunit.phar --configuration ./phpunit.xml
