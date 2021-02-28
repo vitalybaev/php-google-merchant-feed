@@ -117,7 +117,7 @@ class ProductTest extends TestCase
 
         $feedXml = $feed->build();
         $expectedFeedXml = '<?xml version="1.0"?>
-<rss xmlns:g="http://base.google.com/ns/1.0">
+<rss xmlns:g="http://base.google.com/ns/1.0" version="2">
  <channel>
   <title>My awesome store</title>
   <link>https://example.com</link>

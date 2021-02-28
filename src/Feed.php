@@ -96,6 +96,6 @@ class Feed
             $xmlStructure['channel'][] = $item->getXmlStructure($namespace);
         }
 
-        return $xmlService->write('rss', $xmlStructure);
+        return $xmlService->write('rss', new RssElement($xmlStructure));
     }
 }
