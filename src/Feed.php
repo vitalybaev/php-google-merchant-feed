@@ -37,17 +37,26 @@ class Feed
     private $items = [];
 
     /**
+     * Rss version attribute
+     *
+     * @var string
+     */
+    private $rssVersion;
+
+    /**
      * Feed constructor.
      *
      * @param string $title
      * @param string $link
      * @param string $description
+     * @param string $rssVersion
      */
-    public function __construct($title, $link, $description)
+    public function __construct($title, $link, $description, $rssVersion = "")
     {
         $this->title = $title;
         $this->link = $link;
         $this->description = $description;
+        $this->rssVersion = $rssVersion;
     }
 
     /**
@@ -58,6 +67,15 @@ class Feed
     public function addProduct($product)
     {
         $this->items[] = $product;
+    }
+
+    /**
+     * Set
+     * @param $rssVersion
+     */
+    public function setRssVersion($rssVersion)
+    {
+        $this->rssVersion = $rssVersion;
     }
 
     /**
@@ -96,6 +114,6 @@ class Feed
             $xmlStructure['channel'][] = $item->getXmlStructure($namespace);
         }
 
-        return $xmlService->write('rss', $xmlStructure);
+        return $xmlService->write('rss', new RssElement($xmlStructure, $this->rssVersion));
     }
 }
