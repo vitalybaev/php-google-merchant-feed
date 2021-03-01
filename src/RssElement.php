@@ -6,17 +6,31 @@ class RssElement implements \Sabre\Xml\XmlSerializable
 {
 
     private $value;
-    private $rss_version;
 
-    public function __construct($value, $rss_version = 2)
+    /**
+     * Rss version attribute
+     * @var string
+     */
+    private $rssVersion;
+
+    /**
+     * RssElement constructor.
+     *
+     * @param $value
+     * @param string $rssVersion
+     */
+    public function __construct($value, $rssVersion = '')
     {
         $this->value = $value;
-        $this->rss_version = (string)$rss_version;
+        $this->rssVersion = (string)$rssVersion;
     }
 
     public function xmlSerialize(\Sabre\Xml\Writer $writer)
     {
-        $writer->writeAttribute('version', $this->rss_version);
+        if ($this->rssVersion) {
+            $writer->writeAttribute('version', $this->rssVersion);
+        }
+
         $writer->write($this->value);
     }
 }
