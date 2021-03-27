@@ -95,6 +95,34 @@ class ProductTest extends TestCase
         ], $product->getXmlStructure(static::PRODUCT_NAMESPACE));
     }
 
+    public function testProductSetsAvailabilityDate()
+    {
+        $date = '2021-04-01';
+
+        $product = new Product();
+        $product->setAvailabilityDate($date);
+
+        $this->assertEquals([
+            'item' => [
+                ['name' => "{http://base.google.com/ns/1.0}availability_date", "value" => $date],
+            ],
+        ], $product->getXmlStructure(static::PRODUCT_NAMESPACE));
+    }
+
+    public function testProductSetsExpirationDate()
+    {
+        $date = '2021-05-01';
+
+        $product = new Product();
+        $product->setExpirationDate($date);
+
+        $this->assertEquals([
+            'item' => [
+                ['name' => "{http://base.google.com/ns/1.0}expiration_date", "value" => $date],
+            ],
+        ], $product->getXmlStructure(static::PRODUCT_NAMESPACE));
+    }
+
     /**
      * Tests setting Id to product.
      */

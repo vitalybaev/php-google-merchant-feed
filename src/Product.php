@@ -134,6 +134,32 @@ class Product
     }
 
     /**
+     * Sets availability date of the product. Only relevant if availability is set to 'preorder'.
+     *
+     * @param $availabilityDate
+     *
+     * @return $this
+     */
+    public function setAvailabilityDate($availabilityDate)
+    {
+        $this->setAttribute('availability_date', $availabilityDate, false);
+        return $this;
+    }
+
+    /**
+     * Sets the expiration date of the product.
+     *
+     * @param $expirationDate
+     *
+     * @return $this
+     */
+    public function setExpirationDate($expirationDate)
+    {
+        $this->setAttribute('expiration_date', $expirationDate, false);
+        return $this;
+    }
+
+    /**
      * Sets price of the product.
      *
      * @param string $price
