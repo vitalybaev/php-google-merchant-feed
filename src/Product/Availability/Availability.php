@@ -9,4 +9,6 @@ class Availability
     const OUT_OF_STOCK = 'out of stock';
 
     const PREORDER = 'preorder';
+    
+    const BACKORDER = 'backorder';
 }
