@@ -91,6 +91,13 @@ class ProductProperty
     public function getXmlStructure($namespace)
     {
         $value = $this->isCData() ? new Cdata($this->getValue()) : $this->getValue();
+        
+        if (is_object($value) && $value instanceof PropertyBag) {
+            return [
+                'name' => $namespace . $this->getName(),
+                'value' => $value->getPropertiesXmlStructure($namespace),
+            ];
+        }
 
         return [
             'name' => $namespace . $this->getName(),
