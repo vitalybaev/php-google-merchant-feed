@@ -314,6 +314,8 @@ class Product
     }
 
     /**
+     * Sets shipping of the product.
+     *
      * @param Shipping $shipping
      *
      * @return $this
@@ -322,6 +324,20 @@ class Product
     {
         $propertyBag = $shipping->getPropertyBag()->setName('shipping');
         $this->setAttribute('shipping', $propertyBag);
+        return $this;
+    }
+
+    /**
+     * Adds shipping of the product.
+     * 
+     * @param Shipping $shipping
+     *
+     * @return $this
+     */
+    public function addShipping($shipping)
+    {
+        $propertyBag = $shipping->getPropertyBag()->setName('shipping');
+        $this->addAttribute('shipping', $propertyBag);
         return $this;
     }
 
