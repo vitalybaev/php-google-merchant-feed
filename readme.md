@@ -56,6 +56,14 @@ foreach ($products as $product) {
     $shipping->setService('UPS Express');
     $shipping->setPrice('1300 USD');
     $item->setShipping($shipping);
+
+    // Set a custom shipping label and weight (optional)
+    $item->setShippingLabel('ups-ground');
+    $item->setShippingWeight('2.14');
+
+    // Set a custom label (optional)
+    $item->setCustomLabel('Some Label 1', 0);
+    $item->setCustomLabel('Some Label 2', 1);
     
     // Add this product to the feed
     $feed->addProduct($item);
