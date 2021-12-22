@@ -342,6 +342,46 @@ class Product
     }
 
     /**
+     * Add shipping label
+     * 
+     * @param string $str
+     *
+     * @return $this
+     */
+    public function setShippingLabel($str)
+    {
+        $this->setAttribute('shipping_label', $str, false);
+        return $this;
+    }
+
+    /**
+     * Add shipping weight
+     * 
+     * @param string $str
+     *
+     * @return $this
+     */
+    public function setShippingWeight($str)
+    {
+        $this->setAttribute('shipping_weight', $str, false);
+        return $this;
+    }
+
+    /**
+     * Set a custom label
+     * 
+     * @param string $str
+     * @param integer $pos
+     *
+     * @return $this
+     */
+    public function setCustomLabel($str, $pos)
+    {
+        $this->setAttribute('custom_label_' . $pos, $str, false);
+        return $this;
+    }
+
+    /**
      * @param $namespace
      *
      * @return array
