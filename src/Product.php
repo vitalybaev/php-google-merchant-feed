@@ -125,7 +125,7 @@ class Product
     public function setAvailability($availability)
     {
         if (!in_array($availability, [
-            Availability::IN_STOCK, Availability::OUT_OF_STOCK, Availability::PREORDER,
+            Availability::IN_STOCK, Availability::OUT_OF_STOCK, Availability::PREORDER, Availability::BACKORDER,
         ])) {
             throw new InvalidArgumentException("Invalid availability property");
         }
