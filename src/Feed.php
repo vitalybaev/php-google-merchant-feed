@@ -3,6 +3,7 @@
 namespace Vitalybaev\GoogleMerchant;
 
 use Sabre\Xml\Service as SabreXmlService;
+use SimpleXMLElement;
 
 class Feed
 {
@@ -87,7 +88,7 @@ class Feed
     {
         $xmlService = new SabreXmlService();
 
-        $namespace = '{'.static::GOOGLE_MERCHANT_XML_NAMESPACE.'}';
+        $namespace = '{' . static::GOOGLE_MERCHANT_XML_NAMESPACE . '}';
         $xmlService->namespaceMap[static::GOOGLE_MERCHANT_XML_NAMESPACE] = 'g';
 
         $xmlStructure = array('channel' => array());
@@ -115,5 +116,19 @@ class Feed
         }
 
         return $xmlService->write('rss', new RssElement($xmlStructure, $this->rssVersion));
+    }
+
+    /**
+     * This fuction will display the feed string in the browser.
+     * @return file [text/xml]
+     */
+    public function render($feedXml)
+    {
+        // Cast to SimpleXMLElement
+        $xml = new SimpleXMLElement($feedXml);
+        // Set the header to XML
+        Header('Content-type: text/xml');
+        // Display the XML
+        print($xml->asXML());
     }
 }
