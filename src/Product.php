@@ -368,6 +368,45 @@ class Product
     }
 
     /**
+     * Add shipping length
+     * 
+     * @param string $str
+     *
+     * @return $this
+     */
+    public function setShippingLength($str)
+    {
+        $this->setAttribute('shipping_length', $str, false);
+        return $this;
+    }
+
+    /**
+     * Add shipping width
+     * 
+     * @param string $str
+     *
+     * @return $this
+     */
+    public function setShippingWidth($str)
+    {
+        $this->setAttribute('shipping_width', $str, false);
+        return $this;
+    }
+
+    /**
+     * Add shipping height
+     * 
+     * @param string $str
+     *
+     * @return $this
+     */
+    public function setShippingHeight($str)
+    {
+        $this->setAttribute('shipping_height', $str, false);
+        return $this;
+    }
+
+    /**
      * Set a custom label
      * 
      * @param string $str
