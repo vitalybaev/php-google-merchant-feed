@@ -370,6 +370,8 @@ class Product
     /**
      * Add shipping length
      * 
+     * @see https://support.google.com/merchants/answer/6324498?hl=en
+     * 
      * @param string $str
      *
      * @return $this
@@ -383,6 +385,8 @@ class Product
     /**
      * Add shipping width
      * 
+     * @see https://support.google.com/merchants/answer/6324498?hl=en
+     * 
      * @param string $str
      *
      * @return $this
@@ -395,6 +399,8 @@ class Product
 
     /**
      * Add shipping height
+     * 
+     * @see https://support.google.com/merchants/answer/6324498?hl=en
      * 
      * @param string $str
      *
