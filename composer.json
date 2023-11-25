@@ -1,5 +1,5 @@
 {
-  "name": "vitalybaev/google-merchant-feed",
+  "name": "jsmoriss/google-merchant-feed",
   "description": "PHP package for creating Google Merchant products feed",
   "keywords": ["google", "merchant", "feed"],
   "license": "MIT",
@@ -15,7 +15,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Vitalybaev\\GoogleMerchant\\": "src/"
+      "Jsmoriss\\GoogleMerchant\\": "src/"
     }
   }
 }
