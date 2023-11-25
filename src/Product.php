@@ -326,7 +326,7 @@ class Product
     public function setCondition($condition)
     {
         if (!in_array($condition, [
-            Condision::NEW_PRODUCT, Condition::REFURBISHED, Condition::USED,
+            Condition::NEW_PRODUCT, Condition::REFURBISHED, Condition::USED,
         ])) {
             throw new InvalidArgumentException("Invalid condition property");
         }
