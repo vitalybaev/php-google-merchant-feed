@@ -2,9 +2,13 @@
 
 namespace Vitalybaev\GoogleMerchant\Product;
 
-class FacebookAvailability
+class Availability
 {
-    const IN_STOCK = 'in stock';
+    const IN_STOCK = 'in_stock';
 
-    const OUT_OF_STOCK = 'out of stock';
+    const OUT_OF_STOCK = 'out_of_stock';
+
+    const PREORDER = 'preorder';
+    
+    const BACKORDER = 'backorder';
 }
