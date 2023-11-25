@@ -225,6 +225,19 @@ class Product
     }
 
     /**
+     * Adds brand of the product.
+     *
+     * @param string $brand
+     *
+     * @return $this
+     */
+    public function addBrand($brand)
+    {
+        $this->addAttribute('brand', $brand, false);
+        return $this;
+    }
+
+    /**
      * Sets GTIN code of the product.
      *
      * @param string $gtin
