@@ -3,7 +3,8 @@
 namespace Vitalybaev\GoogleMerchant;
 
 use Vitalybaev\GoogleMerchant\Exception\InvalidArgumentException;
-use Vitalybaev\GoogleMerchant\Product\Availability\Availability;
+use Vitalybaev\GoogleMerchant\Product\Availability;
+use Vitalybaev\GoogleMerchant\Product\Condition;
 use Vitalybaev\GoogleMerchant\Product\Shipping;
 
 class Product
@@ -139,6 +140,25 @@ class Product
     {
         if (!in_array($availability, [
             Availability::IN_STOCK, Availability::OUT_OF_STOCK, Availability::PREORDER, Availability::BACKORDER,
+        ])) {
+            throw new InvalidArgumentException("Invalid availability property");
+        }
+        $this->setAttribute('availability', $availability, false);
+        return $this;
+    }
+
+    /**
+     * Sets availability of the product.
+     *
+     * @param string $availability
+     *
+     * @return $this
+     * @throws InvalidArgumentException
+     */
+    public function setFacebookAvailability($availability)
+    {
+        if (!in_array($availability, [
+            FacebookAvailability::IN_STOCK, FacebookAvailability::OUT_OF_STOCK,
         ])) {
             throw new InvalidArgumentException("Invalid availability property");
         }
@@ -305,7 +325,7 @@ class Product
     public function setCondition($condition)
     {
         if (!in_array($condition, [
-            'new', 'refurbished', 'used',
+            Condision::NEW_PRODUCT, Condition::REFURBISHED, Condition::USED,
         ])) {
             throw new InvalidArgumentException("Invalid condition property");
         }
