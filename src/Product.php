@@ -63,6 +63,19 @@ class Product
     }
 
     /**
+     * Sets canonical link to the product.
+     *
+     * @param string $link
+     *
+     * @return $this
+     */
+    public function setCanonicalLink($link)
+    {
+        $this->setAttribute('canonical_link', $link, true);
+        return $this;
+    }
+
+    /**
      * Sets mobile link to the product.
      *
      * @param string $link
