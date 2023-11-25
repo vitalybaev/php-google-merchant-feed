@@ -238,6 +238,19 @@ class Product
     }
 
     /**
+     * Adds GTIN code of the product.
+     *
+     * @param string $gtin
+     *
+     * @return $this
+     */
+    public function addGtin($gtin)
+    {
+        $this->addAttribute('gtin', $gtin, false);
+        return $this;
+    }
+
+    /**
      * Sets MPN code of the product.
      *
      * @param string $mpn
