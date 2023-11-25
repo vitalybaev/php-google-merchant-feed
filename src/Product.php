@@ -5,6 +5,7 @@ namespace Vitalybaev\GoogleMerchant;
 use Vitalybaev\GoogleMerchant\Exception\InvalidArgumentException;
 use Vitalybaev\GoogleMerchant\Product\Availability;
 use Vitalybaev\GoogleMerchant\Product\Condition;
+use Vitalybaev\GoogleMerchant\Product\FacebookAvailability;
 use Vitalybaev\GoogleMerchant\Product\Shipping;
 
 class Product
