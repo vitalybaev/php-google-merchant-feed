@@ -173,6 +173,19 @@ class Product
     }
 
     /**
+     * Sets sale price effective date of the product.
+     *
+     * @param string $price
+     *
+     * @return $this
+     */
+    public function setSalePriceEffectiveDate($price)
+    {
+        $this->setAttribute('sale_price_effective_date', $price, false);
+        return $this;
+    }
+
+    /**
      * Sets Google category of the product.
      *
      * @param string $category
