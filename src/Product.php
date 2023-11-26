@@ -26,6 +26,19 @@ class Product
     }
 
     /**
+     * Sets item group id of product.
+     *
+     * @param string $id
+     *
+     * @return $this
+     */
+    public function setItemGroupId($id)
+    {
+        $this->setAttribute('item_group_id', $id);
+        return $this;
+    }
+
+    /**
      * Sets title of product.
      *
      * @param string $title
