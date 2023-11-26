@@ -47,4 +47,22 @@ class Product extends GoogleProduct
 		$this->addAttribute('brand', $brand, false);
 		return $this;
 	}
+
+	/**
+	 * Sets age group of the product.
+	 *
+	 * The age group the item is targeted towards.
+	 *
+	 * @see https://developers.facebook.com/docs/marketing-api/catalog/reference/.
+	 * @param string $value
+	 * @return $this
+	 */
+	public function setAgeGroup($value)
+	{
+		if ( ! in_array( $value, array( 'adult', 'all ages', 'teen', 'kids', 'toddler', 'infant', 'newborn' ) ) )
+			throw new InvalidArgumentException('Invalid \'age_group\' value');
+
+		$this->setAttribute('age_group', $value, false);
+		return $this;
+	}
 }

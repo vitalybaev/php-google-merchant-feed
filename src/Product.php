@@ -448,12 +448,20 @@ class Product
 	/**
 	 * Sets age group of the product.
 	 *
-	 * @param string $ageGroup
+	 * Use the age group [age_group] attribute to set the demographic that your product is designed for. When you use this
+	 * attribute, your product can appear in results that are filtered by age. For example, results can be filtered by "Women"
+	 * instead of "Girls".
+	 *
+	 * @see https://support.google.com/merchants/answer/6324463.
+	 * @param string $value
 	 * @return $this
 	 */
-	public function setAgeGroup($ageGroup)
+	public function setAgeGroup($value)
 	{
-		$this->setAttribute('age_group', $ageGroup, false);
+		if ( ! in_array( $value, array( 'newborn', 'infant', 'toddler', 'kids', 'adult' ) ) )
+			throw new InvalidArgumentException('Invalid \'age_group\' value');
+
+		$this->setAttribute('age_group', $value, false);
 		return $this;
 	}
 
