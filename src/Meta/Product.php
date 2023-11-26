@@ -1,15 +1,15 @@
 <?php
 
-namespace Vitalybaev\GoogleMerchant\Product;
+namespace Vitalybaev\GoogleMerchant\Meta;
 
-use Vitalybaev\GoogleMerchant\Product;
-use Vitalybaev\GoogleMerchant\Product\Meta\Availability;
-use Vitalybaev\GoogleMerchant\Product\Meta\Schema;
+use Vitalybaev\GoogleMerchant\Product as GoogleProduct;
+use Vitalybaev\GoogleMerchant\Meta\Availability;
+use Vitalybaev\GoogleMerchant\Meta\Schema;
 
 /*
  * Extends the Product class to create a Facebook and Instagram Commerce Manager Catalog Feed.
  */
-class Meta extends Product
+class Product extends GoogleProduct
 {
 	/**
 	 * Sets availability of the product.
@@ -29,7 +29,7 @@ class Meta extends Product
 			$value = Schema::MAP['availability'][$value];
 			
 		if ( ! in_array( $value, array( Availability::IN_STOCK, Availability::OUT_OF_STOCK ) ) )
-			throw new InvalidArgumentException("Invalid availability property");
+			throw new InvalidArgumentException('Invalid availability property');
 
 	    $this->setAttribute('availability', $value, false);
 

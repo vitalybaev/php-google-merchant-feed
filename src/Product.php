@@ -148,7 +148,7 @@ class Product
 			$value = Schema::MAP['availability'][$value];
 
 		if ( ! in_array( $value, array( Availability::IN_STOCK, Availability::OUT_OF_STOCK, Availability::PREORDER, Availability::BACKORDER ) ) )
-			throw new InvalidArgumentException("Invalid availability property");
+			throw new InvalidArgumentException('Invalid availability property');
 
 		$this->setAttribute('availability', $value, false);
 
@@ -299,7 +299,7 @@ class Product
 			$value = Schema::MAP['condition'][$value];
 
 		if ( ! in_array( $value, array( Condition::NEW_PRODUCT, Condition::REFURBISHED, Condition::USED ) ) )
-			throw new InvalidArgumentException("Invalid condition property");
+			throw new InvalidArgumentException('Invalid condition property');
 
 		$this->setAttribute('condition', $value, false);
 
@@ -321,7 +321,7 @@ class Product
 		if ( isset( Schema::MAP['adult'][$value] ) )
 			$value = Schema::MAP['adult'][$value];
 
-		// FILTER_VALIDATE_BOOLEAN returns true for "1", "true", "on" and "yes". Returns false otherwise. 
+		// FILTER_VALIDATE_BOOLEAN returns true for '1', 'true', 'on' and 'yes'. Returns false otherwise. 
 		$this->setAttribute('adult', filter_var( $value, FILTER_VALIDATE_BOOLEAN ) ? 'yes' : 'no', false);
 
 		return $this;
@@ -401,7 +401,7 @@ class Product
 			$value = Schema::MAP['size_type'][$value];
 
 		if ( ! in_array( $value, array( 'regular', 'petite', 'plus', 'tall', 'big', 'maternity' ) ) )
-			throw new InvalidArgumentException("Invalid availability property");
+			throw new InvalidArgumentException('Invalid size_type property');
 
 		$this->addAttribute('size_type', $value, false);
 
@@ -426,7 +426,7 @@ class Product
 			$value = Schema::MAP['size_system'][$value];
 
 		if ( ! in_array( $value, array( 'AU', 'BR', 'CN', 'DE', 'EU', 'FR', 'IT', 'JP', 'MEX', 'UK', 'US' ) ) )
-			throw new InvalidArgumentException("Invalid availability property");
+			throw new InvalidArgumentException('Invalid size_system property');
 
 		$this->setAttribute('size_system', $value, false);
 
@@ -513,7 +513,7 @@ class Product
 			$value = Schema::MAP['energy_efficiency_class'][$value];
 
 		if ( ! in_array( $value, array( 'A+++', 'A++', 'A+', 'A', 'B', 'C', 'D', 'E', 'F', 'G' ) ) )
-			throw new InvalidArgumentException("Invalid availability property");
+			throw new InvalidArgumentException('Invalid energy_efficiency_class property');
 
 		return $value;
 	}

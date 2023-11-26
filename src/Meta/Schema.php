@@ -1,6 +1,6 @@
 <?php
 
-namespace Vitalybaev\GoogleMerchant\Product\Meta;
+namespace Vitalybaev\GoogleMerchant\Meta;
 
 class Schema
 {
