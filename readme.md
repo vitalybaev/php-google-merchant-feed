@@ -17,6 +17,7 @@ Run the Composer require command from the Terminal:
 use Vitalybaev\GoogleMerchant\Feed;
 use Vitalybaev\GoogleMerchant\Product;
 use Vitalybaev\GoogleMerchant\Product\Availability;
+use Vitalybaev\GoogleMerchant\Product\Condition;
 use Vitalybaev\GoogleMerchant\Product\Shipping;
 
 // Create feed object
@@ -41,7 +42,7 @@ foreach ($products as $product) {
     $item->setGoogleCategory($product->category_name);
     $item->setBrand($product->brand->name);
     $item->setGtin($product->barcode);
-    $item->setCondition('new');
+    $item->setCondition(Condition::NEW_PRODUCT);
     
     // Some additional properties
     $item->setColor($product->color);
