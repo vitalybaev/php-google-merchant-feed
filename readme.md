@@ -16,8 +16,8 @@ Run the Composer require command from the Terminal:
 ```php
 use Vitalybaev\GoogleMerchant\Feed;
 use Vitalybaev\GoogleMerchant\Product;
+use Vitalybaev\GoogleMerchant\Product\Availability;
 use Vitalybaev\GoogleMerchant\Product\Shipping;
-use Vitalybaev\GoogleMerchant\Product\Availability\Availability;
 
 // Create feed object
 $feed = new Feed("My awesome store", "https://example.com", "My awesome description");
