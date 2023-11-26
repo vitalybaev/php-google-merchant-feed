@@ -374,6 +374,19 @@ class Product
     }
 
     /**
+     * Sets pattern of the product.
+     *
+     * @param string $pattern
+     *
+     * @return $this
+     */
+    public function setPattern($pattern)
+    {
+        $this->setAttribute('pattern', $pattern, false);
+        return $this;
+    }
+
+    /**
      * Sets size of the product.
      *
      * @param string $size
@@ -383,6 +396,32 @@ class Product
     public function setSize($size)
     {
         $this->setAttribute('size', $size, false);
+        return $this;
+    }
+
+    /**
+     * Sets gender of the product.
+     *
+     * @param string $gender
+     *
+     * @return $this
+     */
+    public function setGender($gender)
+    {
+        $this->setAttribute('gender', $gender, false);
+        return $this;
+    }
+
+    /**
+     * Sets age group of the product.
+     *
+     * @param string $ageGroup
+     *
+     * @return $this
+     */
+    public function setAgeGroup($ageGroup)
+    {
+        $this->setAttribute('age_group', $ageGroup, false);
         return $this;
     }
 
