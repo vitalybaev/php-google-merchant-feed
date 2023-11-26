@@ -3,13 +3,13 @@
 namespace Vitalybaev\GoogleMerchant\Product;
 
 use Vitalybaev\GoogleMerchant\Product;
-use Vitalybaev\GoogleMerchant\Product\Facebook\Availability;
-use Vitalybaev\GoogleMerchant\Product\Facebook\Schema;
+use Vitalybaev\GoogleMerchant\Product\Meta\Availability;
+use Vitalybaev\GoogleMerchant\Product\Meta\Schema;
 
 /*
  * Extends the Product class to create a Facebook and Instagram Commerce Manager Catalog Feed.
  */
-class Facebook extends Product
+class Meta extends Product
 {
 	/**
 	 * Sets availability of the product.
