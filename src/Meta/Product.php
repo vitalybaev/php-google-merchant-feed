@@ -29,7 +29,7 @@ class Product extends GoogleProduct
 			$value = Schema::MAP['availability'][$value];
 			
 		if ( ! in_array( $value, array( Availability::IN_STOCK, Availability::OUT_OF_STOCK ) ) )
-			throw new InvalidArgumentException('Invalid availability property');
+			throw new InvalidArgumentException('Invalid \'availability\' value');
 
 	    $this->setAttribute('availability', $value, false);
 
