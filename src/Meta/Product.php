@@ -53,7 +53,7 @@ class Product extends GoogleProduct
 	 *
 	 * The age group the item is targeted towards.
 	 *
-	 * @see https://developers.facebook.com/docs/marketing-api/catalog/reference/.
+	 * @see https://developers.facebook.com/docs/marketing-api/catalog/reference/
 	 * @param string $value
 	 * @return $this
 	 */
