@@ -24,7 +24,6 @@ class Product extends GoogleProduct
 	 */
 	public function setAvailability($value)
 	{
-		// Maybe map https://schema.org/ItemAvailability URL.
 		if ( isset( Schema::MAP['availability'][$value] ) )
 			$value = Schema::MAP['availability'][$value];
 			
@@ -39,12 +38,13 @@ class Product extends GoogleProduct
 	/**
 	 * Adds brand of the product.
 	 *
-	 * @param string $brand
+	 * @param string $value
 	 * @return $this
 	 */
-	public function addBrand($brand)
+	public function addBrand($value)
 	{
-		$this->addAttribute('brand', $brand, false);
+		$this->addAttribute('brand', $value, false);
+
 		return $this;
 	}
 
@@ -63,6 +63,7 @@ class Product extends GoogleProduct
 			throw new InvalidArgumentException('Invalid \'age_group\' value');
 
 		$this->setAttribute('age_group', $value, false);
+
 		return $this;
 	}
 }

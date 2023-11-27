@@ -21,6 +21,7 @@ class Product
 	public function setId($value)
 	{
 		$this->setAttribute('id', $value);
+
 		return $this;
 	}
 
@@ -33,6 +34,7 @@ class Product
 	public function setItemGroupId($value)
 	{
 		$this->setAttribute('item_group_id', $value);
+
 		return $this;
 	}
 
@@ -45,6 +47,7 @@ class Product
 	public function setTitle($value)
 	{
 		$this->setAttribute('title', $value, true);
+
 		return $this;
 	}
 
@@ -57,6 +60,7 @@ class Product
 	public function setDescription($value)
 	{
 		$this->setAttribute('description', $value, true);
+
 		return $this;
 	}
 
@@ -69,6 +73,7 @@ class Product
 	public function setLink($url)
 	{
 		$this->setAttribute('link', $url, true);
+
 		return $this;
 	}
 
@@ -81,6 +86,7 @@ class Product
 	public function setCanonicalLink($url)
 	{
 		$this->setAttribute('canonical_link', $url, true);
+
 		return $this;
 	}
 
@@ -93,6 +99,7 @@ class Product
 	public function setMobileLink($url)
 	{
 		$this->setAttribute('mobile_link', $url, true);
+
 		return $this;
 	}
 
@@ -105,6 +112,7 @@ class Product
 	public function setImage($url)
 	{
 		$this->setAttribute('image_link', $url, true);
+
 		return $this;
 	}
 
@@ -117,6 +125,7 @@ class Product
 	public function setAdditionalImage($url)
 	{
 		$this->setAttribute('additional_image_link', $url, true);
+
 		return $this;
 	}
 
@@ -134,6 +143,7 @@ class Product
 	public function addAdditionalImage($url)
 	{
 		$this->addAttribute('additional_image_link', $url, true);
+
 		return $this;
 	}
 
@@ -173,6 +183,7 @@ class Product
 	public function setPrice($value)
 	{
 		$this->setAttribute('price', $value, false);
+
 		return $this;
 	}
 
@@ -190,6 +201,7 @@ class Product
 	public function setSalePrice($value)
 	{
 		$this->setAttribute('sale_price', $value, false);
+
 		return $this;
 	}
 
@@ -206,6 +218,7 @@ class Product
 	public function setSalePriceEffectiveDate($value)
 	{
 		$this->setAttribute('sale_price_effective_date', $value, false);
+
 		return $this;
 	}
 
@@ -218,6 +231,7 @@ class Product
 	public function setGoogleCategory($category)
 	{
 		$this->setAttribute('google_product_category', $category, false);
+
 		return $this;
 	}
 
@@ -230,6 +244,7 @@ class Product
 	public function setProductType($value)
 	{
 		$this->setAttribute('product_type', $value, false);
+
 		return $this;
 	}
 
@@ -247,6 +262,7 @@ class Product
 	public function setBrand($value)
 	{
 		$this->setAttribute('brand', $value, false);
+
 		return $this;
 	}
 
@@ -259,6 +275,7 @@ class Product
 	public function setGtin($value)
 	{
 		$this->setAttribute('gtin', $value, false);
+
 		return $this;
 	}
 
@@ -271,6 +288,7 @@ class Product
 	public function addGtin($value)
 	{
 		$this->addAttribute('gtin', $value, false);
+
 		return $this;
 	}
 
@@ -283,6 +301,7 @@ class Product
 	public function setMpn($value)
 	{
 		$this->setAttribute('mpn', $value, false);
+
 		return $this;
 	}
 
@@ -364,6 +383,7 @@ class Product
 	public function setColor($color)
 	{
 		$this->setAttribute('color', $color, false);
+
 		return $this;
 	}
 
@@ -381,6 +401,7 @@ class Product
 	public function setMaterial($material)
 	{
 		$this->setAttribute('material', $material, false);
+
 		return $this;
 	}
 
@@ -399,6 +420,7 @@ class Product
 	public function setPattern($pattern)
 	{
 		$this->setAttribute('pattern', $pattern, false);
+
 		return $this;
 	}
 
@@ -416,6 +438,7 @@ class Product
 	public function setSize($size)
 	{
 		$this->setAttribute('size', $size, false);
+
 		return $this;
 	}
 
@@ -492,6 +515,7 @@ class Product
 	public function setGender($gender)
 	{
 		$this->setAttribute('gender', $gender, false);
+
 		return $this;
 	}
 
@@ -512,6 +536,7 @@ class Product
 			throw new InvalidArgumentException('Invalid \'age_group\' value');
 
 		$this->setAttribute('age_group', $value, false);
+
 		return $this;
 	}
 
@@ -529,6 +554,7 @@ class Product
 	public function setEnergyEfficiencyClass($value)
 	{
 		$this->setAttribute('energy_efficiency_class', $this->sanitizeEnergyEfficiencyClass( $value ), false);
+
 		return $this;
 	}
 
@@ -542,6 +568,7 @@ class Product
 	public function setMinEnergyEfficiencyClass($value)
 	{
 		$this->setAttribute('min_energy_efficiency_class', $this->sanitizeEnergyEfficiencyClass( $value ), false);
+
 		return $this;
 	}
 
@@ -555,6 +582,7 @@ class Product
 	public function setMaxEnergyEfficiencyClass($value)
 	{
 		$this->setAttribute('max_energy_efficiency_class', $this->sanitizeEnergyEfficiencyClass( $value ), false);
+
 		return $this;
 	}
 
@@ -585,6 +613,7 @@ class Product
 	public function setProductLength($value)
 	{
 		$this->setAttribute('product_length', $value, false);
+
 		return $this;
 	}
 
@@ -597,6 +626,7 @@ class Product
 	public function setProductWidth($value)
 	{
 		$this->setAttribute('product_width', $value, false);
+
 		return $this;
 	}
 
@@ -609,6 +639,7 @@ class Product
 	public function setProductHeight($value)
 	{
 		$this->setAttribute('product_height', $value, false);
+
 		return $this;
 	}
 
@@ -621,6 +652,7 @@ class Product
 	public function setProductWeight($value)
 	{
 		$this->setAttribute('product_weight', $value, false);
+
 		return $this;
 	}
 
@@ -633,7 +665,9 @@ class Product
 	public function setShipping($shipping)
 	{
 		$propertyBag = $shipping->getPropertyBag()->setName('shipping');
+
 		$this->setAttribute('shipping', $propertyBag);
+
 		return $this;
 	}
 
@@ -646,7 +680,9 @@ class Product
 	public function addShipping($shipping)
 	{
 		$propertyBag = $shipping->getPropertyBag()->setName('shipping');
+
 		$this->addAttribute('shipping', $propertyBag);
+
 		return $this;
 	}
 
@@ -659,6 +695,7 @@ class Product
 	public function setShippingLabel($value)
 	{
 		$this->setAttribute('shipping_label', $value, false);
+
 		return $this;
 	}
 
@@ -672,6 +709,7 @@ class Product
 	public function setShippingLength($value)
 	{
 		$this->setAttribute('shipping_length', $value, false);
+
 		return $this;
 	}
 
@@ -685,6 +723,7 @@ class Product
 	public function setShippingWidth($value)
 	{
 		$this->setAttribute('shipping_width', $value, false);
+
 		return $this;
 	}
 
@@ -698,6 +737,7 @@ class Product
 	public function setShippingHeight($value)
 	{
 		$this->setAttribute('shipping_height', $value, false);
+
 		return $this;
 	}
 
@@ -710,6 +750,7 @@ class Product
 	public function setShippingWeight($value)
 	{
 		$this->setAttribute('shipping_weight', $value, false);
+
 		return $this;
 	}
 
@@ -723,6 +764,7 @@ class Product
 	public function setCustomLabel($value, $pos)
 	{
 		$this->setAttribute('custom_label_' . $pos, $value, false);
+
 		return $this;
 	}
 
