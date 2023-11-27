@@ -127,7 +127,7 @@ class Product
 	 * image you provide in the image link [image_link] attribute. Additional images for your product can appear to potential
 	 * customers and are commonly used to show a product from different angles or with product staging elements.
 	 *
-	 * @see https://support.google.com/merchants/answer/6324370.
+	 * @see https://support.google.com/merchants/answer/6324370
 	 * @param string $url
 	 * @return $this
 	 */
@@ -142,7 +142,7 @@ class Product
 	 *
 	 * Use the availability [availability] attribute to tell users and Google whether you have a product in stock.
 	 *
-	 * @see https://support.google.com/merchants/answer/6324448.
+	 * @see https://support.google.com/merchants/answer/6324448
 	 * @param string $value
 	 * @return $this
 	 * @throws InvalidArgumentException
@@ -163,36 +163,49 @@ class Product
 	/**
 	 * Sets 'price'.
 	 *
-	 * @param string $price
+	 * Use the price [price] attribute to tell users how much you’re charging for your product. This information is shown to
+	 * users.
+	 *
+	 * @see https://support.google.com/merchants/answer/6324371
+	 * @param string $value
 	 * @return $this
 	 */
-	public function setPrice($price)
+	public function setPrice($value)
 	{
-		$this->setAttribute('price', $price, false);
+		$this->setAttribute('price', $value, false);
 		return $this;
 	}
 
 	/**
 	 * Sets 'sale_price'.
 	 *
-	 * @param string $price
+	 * Use the sale price [sale_price] attribute to tell customers how much you charge for your product during a sale. During a
+	 * sale, your sale price is shown as the current price. If your original price and sale price meet certain requirements,
+	 * your original price may show along with the sale price, so people can see the difference between prices.
+	 *
+	 * @see https://support.google.com/merchants/answer/6324471
+	 * @param string $value
 	 * @return $this
 	 */
-	public function setSalePrice($price)
+	public function setSalePrice($value)
 	{
-		$this->setAttribute('sale_price', $price, false);
+		$this->setAttribute('sale_price', $value, false);
 		return $this;
 	}
 
 	/**
 	 * Sets 'sale_price_effective_date'.
 	 *
-	 * @param string $price
+	 * Use the sale price effective date [sale_price_effective_date] attribute to tell us how long you want a specific sale
+	 * price to be shown to users. 
+	 *
+	 * @see https://support.google.com/merchants/answer/6324460
+	 * @param string $value
 	 * @return $this
 	 */
-	public function setSalePriceEffectiveDate($price)
+	public function setSalePriceEffectiveDate($value)
 	{
-		$this->setAttribute('sale_price_effective_date', $price, false);
+		$this->setAttribute('sale_price_effective_date', $value, false);
 		return $this;
 	}
 
@@ -227,7 +240,7 @@ class Product
 	 * and will be shown to customers. The brand should be clearly visible as an integral part of the packaging or label, and
 	 * not artificially added in the product image.
 	 *
-	 * @see https://support.google.com/merchants/answer/6324351.
+	 * @see https://support.google.com/merchants/answer/6324351
 	 * @param string $value
 	 * @return $this
 	 */
@@ -279,7 +292,7 @@ class Product
 	 * Use the identifier exists [identifier_exists] attribute to indicate that unique product identifiers (UPIs) aren’t available
 	 * for your product. Unique product identifiers are submitted using the GTIN [gtin], MPN [mpn], and brand [brand] attributes.
 	 *
-	 * @see https://support.google.com/merchants/answer/6324478.
+	 * @see https://support.google.com/merchants/answer/6324478
 	 * @param string $value FILTER_VALIDATE_BOOLEAN value.
 	 * @return $this
 	 */
@@ -298,7 +311,7 @@ class Product
 	 * Use the condition [condition] attribute to tell potential customers about the condition of the product you're selling. It’s
 	 * important to set this value correctly since it is used to refine search results.
 	 *
-	 * @see https://support.google.com/merchants/answer/6324469.
+	 * @see https://support.google.com/merchants/answer/6324469
 	 * @param string $value A Schema offer item condition URL or condition string.
 	 * @return $this
 	 * @throws InvalidArgumentException
@@ -322,7 +335,7 @@ class Product
 	 * Use the adult [adult] attribute to indicate that individual products are for adults only because they contain adult content
 	 * such as nudity, sexually suggestive content, or are intended to enhance sexual activity.
 	 *
-	 * @see https://support.google.com/merchants/answer/6324508.
+	 * @see https://support.google.com/merchants/answer/6324508
 	 * @param mixed $value A Schema adult oriented enumeration URL or FILTER_VALIDATE_BOOLEAN value.
 	 * @return $this
 	 */
@@ -344,7 +357,7 @@ class Product
 	 * customers can use to narrow search results. If your product has variants that vary by color, use this attribute to
 	 * provide that information.
 	 *
-	 * @see https://support.google.com/merchants/answer/6324487.
+	 * @see https://support.google.com/merchants/answer/6324487
 	 * @param string $color
 	 * @return $this
 	 */
@@ -361,7 +374,7 @@ class Product
 	 * information helps create accurate filters, which customers can use to narrow search results. If your product has
 	 * variants that vary by material, then provide that information through this attribute.
 	 *
-	 * @see https://support.google.com/merchants/answer/6324410.
+	 * @see https://support.google.com/merchants/answer/6324410
 	 * @param string $material
 	 * @return $this
 	 */
@@ -379,7 +392,7 @@ class Product
 	 * filters, which customers can use to narrow search results. If your product has variants that vary by pattern, then
 	 * provide that information through this attribute.
 	 *
-	 * @see https://support.google.com/merchants/answer/6324483.
+	 * @see https://support.google.com/merchants/answer/6324483
 	 * @param string $pattern
 	 * @return $this
 	 */
@@ -396,7 +409,7 @@ class Product
 	 * product can appear in results that are filtered by size. The size you submit will also affect how your product variants
 	 * are shown.
 	 *
-	 * @see https://support.google.com/merchants/answer/6324492.
+	 * @see https://support.google.com/merchants/answer/6324492
 	 * @param string $size
 	 * @return $this
 	 */
@@ -421,7 +434,7 @@ class Product
 	 *	Big [big]
 	 *	Maternity [maternity]
 	 *
-	 * @see https://support.google.com/merchants/answer/6324497.
+	 * @see https://support.google.com/merchants/answer/6324497
 	 * @param string $value
 	 * @return $this
 	 * @throws InvalidArgumentException
@@ -446,7 +459,7 @@ class Product
 	 * information helps create accurate filters that customers can use to narrow search results. The sizing system you submit
 	 * will affect search, filtering, and how variants are shown.
 	 *
-	 * @see https://support.google.com/merchants/answer/6324502.
+	 * @see https://support.google.com/merchants/answer/6324502
 	 * @param string $value
 	 * @return $this
 	 * @throws InvalidArgumentException
@@ -472,7 +485,7 @@ class Product
 	 * gender information together with the values you provide for the size [size] and age group [age_group] attributes to
 	 * standardize the sizes that are shown to users.
 	 *
-	 * @see https://support.google.com/merchants/answer/6324479.
+	 * @see https://support.google.com/merchants/answer/6324479
 	 * @param string $gender
 	 * @return $this
 	 */
@@ -489,7 +502,7 @@ class Product
 	 * attribute, your product can appear in results that are filtered by age. For example, results can be filtered by "Women"
 	 * instead of "Girls".
 	 *
-	 * @see https://support.google.com/merchants/answer/6324463.
+	 * @see https://support.google.com/merchants/answer/6324463
 	 * @param string $value
 	 * @return $this
 	 */
@@ -509,7 +522,7 @@ class Product
 	 * energy efficiency range. When using this attribute, you will also need to set a minimum energy efficiency class
 	 * [min_energy_efficiency_class] value and a maximum energy efficiency class [max_energy_efficiency_class] value.
 	 *
-	 * @see https://support.google.com/merchants/answer/7562785.
+	 * @see https://support.google.com/merchants/answer/7562785
 	 * @param string $value
 	 * @return $this
 	 */
@@ -522,7 +535,7 @@ class Product
 	/**
 	 * Sets 'min_energy_efficiency_class'.
 	 *
-	 * @see https://support.google.com/merchants/answer/7562785.
+	 * @see https://support.google.com/merchants/answer/7562785
 	 * @param string $value
 	 * @return $this
 	 */
@@ -535,7 +548,7 @@ class Product
 	/**
 	 * Sets 'max_energy_efficiency_class'.
 	 *
-	 * @see https://support.google.com/merchants/answer/7562785.
+	 * @see https://support.google.com/merchants/answer/7562785
 	 * @param string $value
 	 * @return $this
 	 */
