@@ -13,7 +13,7 @@ class Product
 	use HasProperties;
 
 	/**
-	 * Sets id of product.
+	 * Sets 'id'.
 	 *
 	 * @param string $value
 	 * @return $this
@@ -25,7 +25,7 @@ class Product
 	}
 
 	/**
-	 * Sets item group id of product.
+	 * Sets 'item_group_id'.
 	 *
 	 * @param string $value
 	 * @return $this
@@ -37,7 +37,7 @@ class Product
 	}
 
 	/**
-	 * Sets title of product.
+	 * Sets 'title'.
 	 *
 	 * @param string $value
 	 * @return $this
@@ -49,7 +49,7 @@ class Product
 	}
 
 	/**
-	 * Sets description of product.
+	 * Sets 'description'.
 	 *
 	 * @param string $value
 	 * @return $this
@@ -61,7 +61,7 @@ class Product
 	}
 
 	/**
-	 * Sets link to the product.
+	 * Sets 'link'.
 	 *
 	 * @param string $url
 	 * @return $this
@@ -73,7 +73,7 @@ class Product
 	}
 
 	/**
-	 * Sets canonical link to the product.
+	 * Sets 'canonical_link'.
 	 *
 	 * @param string $url
 	 * @return $this
@@ -85,7 +85,7 @@ class Product
 	}
 
 	/**
-	 * Sets mobile link to the product.
+	 * Sets 'mobile_link'.
 	 *
 	 * @param string $url
 	 * @return $this
@@ -97,7 +97,7 @@ class Product
 	}
 
 	/**
-	 * Sets image of the product.
+	 * Sets 'image_link'.
 	 *
 	 * @param string $url
 	 * @return $this
@@ -109,7 +109,7 @@ class Product
 	}
 
 	/**
-	 * Sets additional image of the product.
+	 * Sets 'additional_image_link'.
 	 *
 	 * @param string $url
 	 * @return $this
@@ -121,8 +121,13 @@ class Product
 	}
 
 	/**
-	 * Sets additional image of the product.
+	 * Adds 'additional_image_link'.
 	 *
+	 * Use the additional image link [additional_image_link] attribute to provide more images for your product beyond the main
+	 * image you provide in the image link [image_link] attribute. Additional images for your product can appear to potential
+	 * customers and are commonly used to show a product from different angles or with product staging elements.
+	 *
+	 * @see https://support.google.com/merchants/answer/6324370.
 	 * @param string $url
 	 * @return $this
 	 */
@@ -133,7 +138,7 @@ class Product
 	}
 
 	/**
-	 * Sets availability of the product.
+	 * Sets 'availability'.
 	 *
 	 * Use the availability [availability] attribute to tell users and Google whether you have a product in stock.
 	 *
@@ -156,7 +161,7 @@ class Product
 	}
 
 	/**
-	 * Sets price of the product.
+	 * Sets 'price'.
 	 *
 	 * @param string $price
 	 * @return $this
@@ -168,7 +173,7 @@ class Product
 	}
 
 	/**
-	 * Sets sale price of the product.
+	 * Sets 'sale_price'.
 	 *
 	 * @param string $price
 	 * @return $this
@@ -180,7 +185,7 @@ class Product
 	}
 
 	/**
-	 * Sets sale price effective date of the product.
+	 * Sets 'sale_price_effective_date'.
 	 *
 	 * @param string $price
 	 * @return $this
@@ -192,7 +197,7 @@ class Product
 	}
 
 	/**
-	 * Sets Google category of the product.
+	 * Sets 'google_product_category'.
 	 *
 	 * @param string $category
 	 * @return $this
@@ -204,7 +209,7 @@ class Product
 	}
 
 	/**
-	 * Sets Google product type of the product.
+	 * Sets 'product_type'.
 	 *
 	 * @param string $value
 	 * @return $this
@@ -216,55 +221,60 @@ class Product
 	}
 
 	/**
-	 * Sets brand of the product.
+	 * Sets 'brand'.
 	 *
-	 * @param string $brand
+	 * Use the brand [brand] attribute to indicate the product's brand name. The brand is used to help identify your product
+	 * and will be shown to customers. The brand should be clearly visible as an integral part of the packaging or label, and
+	 * not artificially added in the product image.
+	 *
+	 * @see https://support.google.com/merchants/answer/6324351.
+	 * @param string $value
 	 * @return $this
 	 */
-	public function setBrand($brand)
+	public function setBrand($value)
 	{
-		$this->setAttribute('brand', $brand, false);
+		$this->setAttribute('brand', $value, false);
 		return $this;
 	}
 
 	/**
-	 * Sets GTIN code of the product.
+	 * Sets 'gtin'.
 	 *
-	 * @param string $gtin
+	 * @param string $value
 	 * @return $this
 	 */
-	public function setGtin($gtin)
+	public function setGtin($value)
 	{
-		$this->setAttribute('gtin', $gtin, false);
+		$this->setAttribute('gtin', $value, false);
 		return $this;
 	}
 
 	/**
-	 * Adds GTIN code of the product.
+	 * Adds 'gtin'.
 	 *
-	 * @param string $gtin
+	 * @param string $value
 	 * @return $this
 	 */
-	public function addGtin($gtin)
+	public function addGtin($value)
 	{
-		$this->addAttribute('gtin', $gtin, false);
+		$this->addAttribute('gtin', $value, false);
 		return $this;
 	}
 
 	/**
-	 * Sets MPN code of the product.
+	 * Sets 'mpn'.
 	 *
-	 * @param string $mpn
+	 * @param string $value
 	 * @return $this
 	 */
-	public function setMpn($mpn)
+	public function setMpn($value)
 	{
-		$this->setAttribute('mpn', $mpn, false);
+		$this->setAttribute('mpn', $value, false);
 		return $this;
 	}
 
 	/**
-	 * Sets identifier_exists code of the product.
+	 * Sets 'identifier_exists'.
 	 *
 	 * Use the identifier exists [identifier_exists] attribute to indicate that unique product identifiers (UPIs) aren’t available
 	 * for your product. Unique product identifiers are submitted using the GTIN [gtin], MPN [mpn], and brand [brand] attributes.
@@ -283,7 +293,7 @@ class Product
 	}
 
 	/**
-	 * Sets condition of the product.
+	 * Sets 'condition'.
 	 *
 	 * Use the condition [condition] attribute to tell potential customers about the condition of the product you're selling. It’s
 	 * important to set this value correctly since it is used to refine search results.
@@ -307,7 +317,7 @@ class Product
 	}
 
 	/**
-	 * Sets adult of the product.
+	 * Sets 'adult'.
 	 *
 	 * Use the adult [adult] attribute to indicate that individual products are for adults only because they contain adult content
 	 * such as nudity, sexually suggestive content, or are intended to enhance sexual activity.
@@ -328,8 +338,13 @@ class Product
 	}
 
 	/**
-	 * Sets color of the product.
+	 * Sets 'color'.
 	 *
+	 * Use the color [color] attribute to describe your product’s color. This information helps create accurate filters, which
+	 * customers can use to narrow search results. If your product has variants that vary by color, use this attribute to
+	 * provide that information.
+	 *
+	 * @see https://support.google.com/merchants/answer/6324487.
 	 * @param string $color
 	 * @return $this
 	 */
@@ -340,8 +355,13 @@ class Product
 	}
 
 	/**
-	 * Sets material of the product.
+	 * Sets 'material'.
 	 *
+	 * Use the material [material] attribute to describe the main fabric or material that your product is made of. This
+	 * information helps create accurate filters, which customers can use to narrow search results. If your product has
+	 * variants that vary by material, then provide that information through this attribute.
+	 *
+	 * @see https://support.google.com/merchants/answer/6324410.
 	 * @param string $material
 	 * @return $this
 	 */
@@ -352,8 +372,14 @@ class Product
 	}
 
 	/**
-	 * Sets pattern of the product.
+	 * Sets 'pattern'.
 	 *
+	 * Use the pattern [pattern] attribute to describe the pattern or graphic print on your product. For example, a T-shirt
+	 * might have a logo of a sports team, and so you might submit bears or tigers. This information helps create accurate
+	 * filters, which customers can use to narrow search results. If your product has variants that vary by pattern, then
+	 * provide that information through this attribute.
+	 *
+	 * @see https://support.google.com/merchants/answer/6324483.
 	 * @param string $pattern
 	 * @return $this
 	 */
@@ -364,8 +390,13 @@ class Product
 	}
 
 	/**
-	 * Sets size of the product.
+	 * Sets 'size'.
 	 *
+	 * Use the size [size] attribute to describe the standardized size of your product. When you use this attribute, your
+	 * product can appear in results that are filtered by size. The size you submit will also affect how your product variants
+	 * are shown.
+	 *
+	 * @see https://support.google.com/merchants/answer/6324492.
 	 * @param string $size
 	 * @return $this
 	 */
@@ -376,7 +407,7 @@ class Product
 	}
 
 	/**
-	 * Adds size type of the product.
+	 * Adds 'size_type'.
 	 *
 	 * Use the size type [size_type] attribute to describe the cut of your product. This information helps create accurate
 	 * filters, which customers can use to narrow search results.
@@ -409,7 +440,7 @@ class Product
 	}
 
 	/**
-	 * Sets size system of the product.
+	 * Sets 'size_system'.
 	 *
 	 * With the size system [size_system] attribute you can explain which country’s sizing system your product uses. This
 	 * information helps create accurate filters that customers can use to narrow search results. The sizing system you submit
@@ -434,8 +465,14 @@ class Product
 	}
 
 	/**
-	 * Sets gender of the product.
+	 * Sets 'gender'.
 	 *
+	 * Specify the gender your product is designed for using the gender [gender] attribute. When you provide this information,
+	 * potential customers can accurately filter products by gender to help narrow their search. Keep in mind that we use the
+	 * gender information together with the values you provide for the size [size] and age group [age_group] attributes to
+	 * standardize the sizes that are shown to users.
+	 *
+	 * @see https://support.google.com/merchants/answer/6324479.
 	 * @param string $gender
 	 * @return $this
 	 */
@@ -446,7 +483,7 @@ class Product
 	}
 
 	/**
-	 * Sets age group of the product.
+	 * Sets 'age_group'.
 	 *
 	 * Use the age group [age_group] attribute to set the demographic that your product is designed for. When you use this
 	 * attribute, your product can appear in results that are filtered by age. For example, results can be filtered by "Women"
@@ -466,7 +503,7 @@ class Product
 	}
 
 	/**
-	 * Sets energy efficiency class of the product.
+	 * Sets 'energy_efficiency_class'.
 	 *
 	 * Use the energy efficiency class [energy_efficiency_class] attribute to tell customers how your product rates on a given
 	 * energy efficiency range. When using this attribute, you will also need to set a minimum energy efficiency class
@@ -483,7 +520,7 @@ class Product
 	}
 
 	/**
-	 * Sets min energy efficiency class of the product.
+	 * Sets 'min_energy_efficiency_class'.
 	 *
 	 * @see https://support.google.com/merchants/answer/7562785.
 	 * @param string $value
@@ -496,7 +533,7 @@ class Product
 	}
 
 	/**
-	 * Sets max energy efficiency class of the product.
+	 * Sets 'max_energy_efficiency_class'.
 	 *
 	 * @see https://support.google.com/merchants/answer/7562785.
 	 * @param string $value
@@ -527,7 +564,7 @@ class Product
 	}
 
 	/**
-	 * Add product length.
+	 * Sets 'product_length'.
 	 * 
 	 * @param string $value
 	 * @return $this
@@ -539,7 +576,7 @@ class Product
 	}
 
 	/**
-	 * Add product width.
+	 * Sets 'product_width'.
 	 * 
 	 * @param string $value
 	 * @return $this
@@ -551,7 +588,7 @@ class Product
 	}
 
 	/**
-	 * Add product height.
+	 * Sets 'product_height'.
 	 * 
 	 * @param string $value
 	 * @return $this
@@ -563,7 +600,7 @@ class Product
 	}
 
 	/**
-	 * Add product weight.
+	 * Sets 'product_weight'.
 	 * 
 	 * @param string $value
 	 * @return $this
@@ -575,7 +612,7 @@ class Product
 	}
 
 	/**
-	 * Sets shipping of the product.
+	 * Sets 'shipping'.
 	 *
 	 * @param Shipping $shipping
 	 * @return $this
@@ -588,7 +625,7 @@ class Product
 	}
 
 	/**
-	 * Adds shipping of the product.
+	 * Adds 'shipping'.
 	 * 
 	 * @param Shipping $shipping
 	 * @return $this
@@ -601,7 +638,7 @@ class Product
 	}
 
 	/**
-	 * Add shipping label
+	 * Sets 'shipping_label'.
 	 * 
 	 * @param string $value
 	 * @return $this
@@ -613,7 +650,7 @@ class Product
 	}
 
 	/**
-	 * Add shipping length.
+	 * Sets 'shipping_length'.
 	 * 
 	 * @see https://support.google.com/merchants/answer/6324498
 	 * @param string $value
@@ -626,7 +663,7 @@ class Product
 	}
 
 	/**
-	 * Add shipping width.
+	 * Sets 'shipping_width'.
 	 * 
 	 * @see https://support.google.com/merchants/answer/6324498
 	 * @param string $value
@@ -639,7 +676,7 @@ class Product
 	}
 
 	/**
-	 * Add shipping height.
+	 * Sets 'shipping_height'.
 	 * 
 	 * @see https://support.google.com/merchants/answer/6324498
 	 * @param string $value
@@ -652,7 +689,7 @@ class Product
 	}
 
 	/**
-	 * Add shipping weight.
+	 * Sets 'shipping_weight'.
 	 * 
 	 * @param string $value
 	 * @return $this
@@ -664,7 +701,7 @@ class Product
 	}
 
 	/**
-	 * Set a custom label.
+	 * Sets a custom label.
 	 * 
 	 * @param string $value
 	 * @param integer $pos
