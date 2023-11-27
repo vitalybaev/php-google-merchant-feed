@@ -60,13 +60,23 @@ class Feed
     }
 
     /**
-     * Adds product to feed.
+     * Adds product (aka item) to feed.
      *
      * @param $product
      */
     public function addProduct($product)
     {
-        $this->items[] = $product;
+        $this->addItem($product);
+    }
+
+    /**
+     * Adds item to feed.
+     *
+     * @param $product
+     */
+    public function addItem($item)
+    {
+        $this->items[] = $item;
     }
 
     /**
