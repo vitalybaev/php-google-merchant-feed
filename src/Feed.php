@@ -97,33 +97,40 @@ class Feed
     {
         $xmlService = new SabreXmlService();
 
-        $namespace = '{'.static::GOOGLE_MERCHANT_XML_NAMESPACE.'}';
-        $xmlService->namespaceMap[static::GOOGLE_MERCHANT_XML_NAMESPACE] = 'g';
+        $namespace = '{' . static::GOOGLE_MERCHANT_XML_NAMESPACE . '}';
 
-        $xmlStructure = array('channel' => array());
+        $xmlService->namespaceMap[ static::GOOGLE_MERCHANT_XML_NAMESPACE ] = 'g';
 
-        if (!empty($this->title)) {
-            $xmlStructure['channel'][] = [
+        $xmlStructure = array( 'channel' => array() );
+
+        if ( ! empty( $this->title ) ) {
+
+            $xmlStructure[ 'channel' ][] = [
                 'title' => $this->title,
             ];
         }
 
-        if (!empty($this->link)) {
-            $xmlStructure['channel'][] = [
+        if ( ! empty( $this->link ) ) {
+
+            $xmlStructure[ 'channel' ][] = [
                 'link' => $this->link,
             ];
         }
 
-        if (!empty($this->description)) {
-            $xmlStructure['channel'][] = [
+        if ( ! empty( $this->description ) ) {
+
+            $xmlStructure[ 'channel' ][] = [
                 'description' => $this->description,
             ];
         }
 
-        foreach ($this->items as $item) {
-            $xmlStructure['channel'][] = $item->getXmlStructure($namespace);
+        foreach ( $this->items as $num as $item ) {
+
+            $xmlStructure[ 'channel' ][] = $item->getXmlStructure( $namespace );
+
+	    unset( $this->items[ $num ] );	// Save memory as we go.
         }
 
-        return $xmlService->write('rss', new RssElement($xmlStructure, $this->rssVersion));
+        return $xmlService->write( 'rss', new RssElement( $xmlStructure, $this->rssVersion ) );
     }
 }
