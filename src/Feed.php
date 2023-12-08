@@ -95,12 +95,6 @@ class Feed
 	 */
 	public function build()
 	{
-		$xmlService = new SabreXmlService();
-
-		$namespace = '{' . static::GOOGLE_MERCHANT_XML_NAMESPACE . '}';
-
-		$xmlService->namespaceMap[ static::GOOGLE_MERCHANT_XML_NAMESPACE ] = 'g';
-
 		$xmlStructure = array( 'channel' => array() );
 
 		if ( ! empty( $this->title ) ) {
@@ -124,12 +118,20 @@ class Feed
 			];
 		}
 
+		$namespace = '{' . static::GOOGLE_MERCHANT_XML_NAMESPACE . '}';
+
 		foreach ( $this->items as $num => $item ) {
 		
 			$xmlStructure[ 'channel' ][] = $item->getXmlStructure( $namespace );
 			
-			unset( $this->items[ $num ] );	// Save memory as we go.
+			unset( $this->items[ $num ] );
 		}
+
+		$this->items = [];
+
+		$xmlService = new SabreXmlService();
+
+		$xmlService->namespaceMap[ static::GOOGLE_MERCHANT_XML_NAMESPACE ] = 'g';
 
 		return $xmlService->write( 'rss', new RssElement( $xmlStructure, $this->rssVersion ) );
 	}
