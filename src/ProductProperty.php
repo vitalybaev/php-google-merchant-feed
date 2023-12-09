@@ -37,7 +37,7 @@ class ProductProperty
 		$this->isCData = $isCData;
 	}
 
-	public static function getInstance( $name, $value, $isCData )
+	public static function &getInstance( $name, $value, $isCData )
 	{
 		$key = md5( strtolower( $name ) . '-' . serialize( $value ) . '-' . serialize( $isCData ) );
 
