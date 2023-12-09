@@ -21,6 +21,8 @@ class ProductProperty
 	 */
 	private $isCData = false;
 
+	private static $instances = [];
+
 	/**
 	 * ProductProperty constructor.
 	 *
@@ -33,6 +35,18 @@ class ProductProperty
 		$this->name    = strtolower( $name );
 		$this->value   = $value;
 		$this->isCData = $isCData;
+	}
+
+	public static function getInstance( $name, $value, $isCData )
+	{
+		$key = md5( serialize( $name ) . '-' . serialize( $value ) . '-' . serialize( $isCData ) );
+
+		if ( ! isset( self::$instances[ $key ] ) ) {
+
+			self::$instances[ $key ] = new self( $name, $value, $isCData );
+		}
+
+		return self::$instances[ $key ];
 	}
 
 	/**

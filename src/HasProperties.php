@@ -24,7 +24,7 @@ trait HasProperties
 	 */
 	public function setAttribute( $name, $value, $isCData = false )
 	{
-		$productProperty = new ProductProperty( $name, $value, $isCData );
+		$productProperty = ProductProperty::getInstance( $name, $value, $isCData );
 
 		$attributeName = strtolower( $name );
 
@@ -44,7 +44,7 @@ trait HasProperties
 	 */
 	public function addAttribute( $name, $value, $isCData = false )
 	{
-		$productProperty = new ProductProperty( $name, $value, $isCData );
+		$productProperty = ProductProperty::getInstance( $name, $value, $isCData );
 
 		$attributeName = strtolower( $name );
 
