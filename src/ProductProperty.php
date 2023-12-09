@@ -39,7 +39,7 @@ class ProductProperty
 
 	public static function getInstance( $name, $value, $isCData )
 	{
-		$key  = md5( strtolower( $name ) . '-' . serialize( $value ) . '-' . serialize( $isCData ) );
+		$key = md5( strtolower( $name ) . '-' . serialize( $value ) . '-' . serialize( $isCData ) );
 
 		if ( ! isset( self::$instances[ $key ] ) ) {
 
