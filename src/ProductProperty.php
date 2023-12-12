@@ -12,7 +12,7 @@ class ProductProperty
 	private $name;
 
 	/**
-	 * @var string
+	 * @var string|double|object
 	 */
 	private $value;
 
@@ -21,14 +21,18 @@ class ProductProperty
 	 */
 	private $isCData = false;
 
+	/**
+	 * @var array
+	 */
 	private static $instances = [];
 
 	/**
 	 * ProductProperty constructor.
 	 *
-	 * @param      $name
-	 * @param      $value
-	 * @param bool $isCData
+	 * @param  string               $name
+	 * @param  string|double|object $value
+	 * @param  bool                 $isCData
+	 * @return object
 	 */
 	public function __construct( $name, $value, $isCData )
 	{
@@ -37,9 +41,17 @@ class ProductProperty
 		$this->isCData = $isCData;
 	}
 
+	/**
+	 * Returns a ProductProperty object referenced by an MD5 of $name, $value, and $isCData.
+	 *
+	 * @param  string               $name
+	 * @param  string|double|object $value
+	 * @param  bool                 $isCData
+	 * @return object reference
+	 */
 	public static function &getInstance( $name, $value, $isCData )
 	{
-		$key = md5( strtolower( $name ) . '-' . serialize( $value ) . '-' . serialize( $isCData ) );
+		$key = md5( strtolower( $name ) . serialize( $value ) . ( $isCData ? 'true' : 'false' ) );
 
 		if ( ! isset( self::$instances[ $key ] ) ) {
 
@@ -58,27 +70,11 @@ class ProductProperty
 	}
 
 	/**
-	 * @param string $name
-	 */
-	public function setName( $name )
-	{
-		$this->name = $name;
-	}
-
-	/**
 	 * @return string|PropertyBag
 	 */
 	public function getValue()
 	{
 		return $this->value;
-	}
-
-	/**
-	 * @param string $value
-	 */
-	public function setValue( $value )
-	{
-		$this->value = $value;
 	}
 
 	/**
@@ -90,16 +86,7 @@ class ProductProperty
 	}
 
 	/**
-	 * @param bool $isCData
-	 */
-	public function setIsCData( $isCData )
-	{
-		$this->isCData = $isCData;
-	}
-
-	/**
 	 * @param $namespace
-	 *
 	 * @return array
 	 */
 	public function getXmlStructure( $namespace )
