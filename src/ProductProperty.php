@@ -24,6 +24,7 @@ class ProductProperty
 	/**
 	 * @var array
 	 */
+	private static $values    = [];
 	private static $instances = [];
 
 	/**
@@ -36,8 +37,15 @@ class ProductProperty
 	 */
 	public function __construct( $name, $value, $isCData )
 	{
+		$val_key = md5( serialize( $value ) );
+
+		if ( ! isset( self::$values[ $val_key ] ) ) {
+
+			self::$values[ $val_key ] = $value;
+		}
+
 		$this->name    = strtolower( $name );
-		$this->value   = $value;
+		$this->value   =& self::$values[ $val_key ];
 		$this->isCData = $isCData;
 	}
 
@@ -51,14 +59,14 @@ class ProductProperty
 	 */
 	public static function &getInstance( $name, $value, $isCData )
 	{
-		$key = md5( strtolower( $name ) . serialize( $value ) . ( $isCData ? 'true' : 'false' ) );
+		$inst_key = md5( strtolower( $name ) . serialize( $value ) . ( $isCData ? 'true' : 'false' ) );
 
-		if ( ! isset( self::$instances[ $key ] ) ) {
+		if ( ! isset( self::$instances[ $inst_key ] ) ) {
 
-			self::$instances[ $key ] = new self( $name, $value, $isCData );
+			self::$instances[ $inst_key ] = new self( $name, $value, $isCData );
 		}
 
-		return self::$instances[ $key ];
+		return self::$instances[ $inst_key ];
 	}
 
 	/**
@@ -94,6 +102,7 @@ class ProductProperty
 		$value = $this->isCData() ? new Cdata( $this->getValue() ) : $this->getValue();
 		
 		if ( is_object( $value ) && $value instanceof PropertyBag ) {
+
 			return [
 				'name'  => $namespace . $this->getName(),
 				'value' => $value->getPropertiesXmlStructure( $namespace ),
