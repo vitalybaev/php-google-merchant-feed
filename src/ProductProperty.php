@@ -24,8 +24,8 @@ class ProductProperty
 	/**
 	 * @var array
 	 */
-	private static $values    = [];
-	private static $instances = [];
+	private static $cache_vals = [];
+	private static $cache_inst = [];
 
 	/**
 	 * ProductProperty constructor.
@@ -37,15 +37,23 @@ class ProductProperty
 	 */
 	public function __construct( $name, $value, $isCData )
 	{
-		$val_key = md5( serialize( $value ) );
+		if ( is_object( $value ) ) {
+		
+			$val_id = md5( serialize( $value ) );
 
-		if ( ! isset( self::$values[ $val_key ] ) ) {
+		} elseif ( is_string( $value ) && strlen( $value ) > 32 ) {
 
-			self::$values[ $val_key ] = $value;
+			$val_id = md5( $value );
+
+		} else $val_id = $value;
+
+		if ( ! isset( self::$cache_vals[ $val_id ] ) ) {
+
+			self::$cache_vals[ $val_id ] = $value;
 		}
 
 		$this->name    = strtolower( $name );
-		$this->value   =& self::$values[ $val_key ];
+		$this->value   =& self::$cache_vals[ $val_id ];
 		$this->isCData = $isCData;
 	}
 
@@ -59,14 +67,20 @@ class ProductProperty
 	 */
 	public static function &getInstance( $name, $value, $isCData )
 	{
-		$inst_key = md5( strtolower( $name ) . serialize( $value ) . ( $isCData ? 'true' : 'false' ) );
+		$inst_id = md5( strtolower( $name ) . serialize( $value ) . ( $isCData ? 'true' : 'false' ) );
 
-		if ( ! isset( self::$instances[ $inst_key ] ) ) {
+		if ( ! isset( self::$cache_inst[ $inst_id ] ) ) {
 
-			self::$instances[ $inst_key ] = new self( $name, $value, $isCData );
+			self::$cache_inst[ $inst_id ] = new self( $name, $value, $isCData );
 		}
 
-		return self::$instances[ $inst_key ];
+		return self::$cache_inst[ $inst_id ];
+	}
+
+	public static function resetCache() {
+		
+		self::$cache_vals = [];
+		self::$cache_inst = [];
 	}
 
 	/**

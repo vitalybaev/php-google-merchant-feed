@@ -129,6 +129,8 @@ class Feed
 
 		$this->items = [];
 
+		ProductProperty::resetCache();
+
 		$xmlService = new SabreXmlService();
 
 		$xmlService->namespaceMap[ static::GOOGLE_MERCHANT_XML_NAMESPACE ] = 'g';
