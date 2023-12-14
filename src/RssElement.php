@@ -5,32 +5,34 @@ namespace Vitalybaev\GoogleMerchant;
 class RssElement implements \Sabre\Xml\XmlSerializable
 {
 
-    private $value;
+	private $value;
 
-    /**
-     * Rss version attribute
-     * @var string
-     */
-    private $rssVersion;
+	/**
+	 * Rss version attribute
+	 * @var string
+	 */
+	private $rssVersion;
 
-    /**
-     * RssElement constructor.
-     *
-     * @param $value
-     * @param string $rssVersion
-     */
-    public function __construct($value, $rssVersion = '')
-    {
-        $this->value = $value;
-        $this->rssVersion = (string)$rssVersion;
-    }
+	/**
+	 * RssElement constructor.
+	 *
+	 * @param $value
+	 * @param string $rssVersion
+	 */
+	public function __construct($value, $rssVersion = '')
+	{
+		$this->value = $value;
 
-    public function xmlSerialize(\Sabre\Xml\Writer $writer)
-    {
-        if ($this->rssVersion) {
-            $writer->writeAttribute('version', $this->rssVersion);
-        }
+		$this->rssVersion = (string)$rssVersion;
+	}
 
-        $writer->write($this->value);
-    }
+	public function xmlSerialize(\Sabre\Xml\Writer $writer)
+	{
+		if ($this->rssVersion) {
+
+			$writer->writeAttribute('version', $this->rssVersion);
+		}
+
+		$writer->write($this->value);
+	}
 }
