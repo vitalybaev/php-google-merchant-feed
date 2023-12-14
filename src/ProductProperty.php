@@ -58,7 +58,7 @@ class ProductProperty
 	}
 
 	/**
-	 * Returns a ProductProperty object referenced by an MD5 of $name, $value, and $isCData.
+	 * Returns a cached ProductProperty object referenced by an MD5 of $name, $value, and $isCData.
 	 *
 	 * @param  string               $name
 	 * @param  string|double|object $value
@@ -77,6 +77,9 @@ class ProductProperty
 		return self::$cache_inst[ $inst_id ];
 	}
 
+	/**
+	 * Resets the value and instance cache.
+	 */
 	public static function resetCache() {
 		
 		self::$cache_vals = [];
