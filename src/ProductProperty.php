@@ -24,8 +24,8 @@ class ProductProperty
 	/**
 	 * @var array
 	 */
-	private static $cache_vals = [];
-	private static $cache_inst = [];
+	private static $instances = [];
+	private static $cache     = [];
 
 	/**
 	 * ProductProperty constructor.
@@ -37,23 +37,8 @@ class ProductProperty
 	 */
 	public function __construct( $name, $value, $isCData )
 	{
-		if ( is_object( $value ) ) {
-		
-			$val_id = md5( serialize( $value ) );
-
-		} elseif ( is_string( $value ) && strlen( $value ) > 32 ) {
-
-			$val_id = md5( $value );
-
-		} else $val_id = $value;
-
-		if ( ! isset( self::$cache_vals[ $val_id ] ) ) {
-
-			self::$cache_vals[ $val_id ] = $value;
-		}
-
-		$this->name    = strtolower( $name );
-		$this->value   =& self::$cache_vals[ $val_id ];
+		$this->name    =& self::getCache( strtolower( $name ) );
+		$this->value   =& self::getCache( $value );
 		$this->isCData = $isCData;
 	}
 
@@ -67,23 +52,14 @@ class ProductProperty
 	 */
 	public static function &getInstance( $name, $value, $isCData )
 	{
-		$inst_id = md5( strtolower( $name ) . serialize( $value ) . ( $isCData ? 'true' : 'false' ) );
+		$key = md5( strtolower( $name ) . serialize( $value ) . ( $isCData ? 'true' : 'false' ) );
 
-		if ( ! isset( self::$cache_inst[ $inst_id ] ) ) {
+		if ( ! isset( self::$instances[ $key ] ) ) {
 
-			self::$cache_inst[ $inst_id ] = new self( $name, $value, $isCData );
+			self::$instances[ $key ] = new self( $name, $value, $isCData );
 		}
 
-		return self::$cache_inst[ $inst_id ];
-	}
-
-	/**
-	 * Resets the value and instance cache.
-	 */
-	public static function resetCache() {
-		
-		self::$cache_vals = [];
-		self::$cache_inst = [];
+		return self::$instances[ $key ];
 	}
 
 	/**
@@ -120,15 +96,34 @@ class ProductProperty
 		
 		if ( is_object( $value ) && $value instanceof PropertyBag ) {
 
-			return [
-				'name'  => $namespace . $this->getName(),
-				'value' => $value->getPropertiesXmlStructure( $namespace ),
-			];
+			$value = $value->getPropertiesXmlStructure( $namespace );
 		}
 
-		return [
-			'name'  => $namespace . $this->getName(),
-			'value' => $value,
-		];
+		$xmlStruc = [];
+
+		$xmlStruc[ 'name' ]  =& self::getCache( $namespace . $this->getName() );
+		$xmlStruc[ 'value' ] =& self::getCache( $value );
+
+		return $xmlStruc;
+	}
+
+	/**
+	 * @param  string|double|array $value
+	 * @return $value reference
+	 */
+	private function &getCache( $value )
+	{
+		if ( is_string( $value ) ) {
+		
+			$key = strlen( $value ) > 32 ? md5( $value ) : $value;
+
+		} else $key = md5( serialize( $value ) );
+
+		if ( ! isset( self::$cache[ $key ] ) ) {
+
+			self::$cache[ $key ] = $value;
+		}
+
+		return self::$cache[ $key ];
 	}
 }
