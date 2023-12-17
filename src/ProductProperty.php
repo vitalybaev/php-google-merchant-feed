@@ -107,6 +107,12 @@ class ProductProperty
 		return $xmlStruc;
 	}
 
+	public function resetCache()
+	{
+		self::$instances = [];
+		self::$cache     = [];
+	}
+
 	/**
 	 * @param  string|double|array $value
 	 * @return $value reference
