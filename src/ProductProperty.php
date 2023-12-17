@@ -107,7 +107,7 @@ class ProductProperty
 		return $xmlStruc;
 	}
 
-	public function resetCache()
+	public static function resetCache()
 	{
 		self::$instances = [];
 		self::$cache     = [];
@@ -117,7 +117,7 @@ class ProductProperty
 	 * @param  string|double|array $value
 	 * @return $value reference
 	 */
-	private function &getCache( $value )
+	private static function &getCache( $value )
 	{
 		if ( is_string( $value ) ) {
 		
