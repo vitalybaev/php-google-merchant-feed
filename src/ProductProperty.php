@@ -152,8 +152,6 @@ class ProductProperty
 			self::$cache[ $key ] = $value;
 		}
 
-		unset( $value );
-
 		return self::$cache[ $key ];
 	}
 }
