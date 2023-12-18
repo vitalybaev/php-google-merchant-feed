@@ -119,15 +119,29 @@ class ProductProperty
 	 */
 	private static function &getCache( $value )
 	{
-		if ( null === $value ) {
-			
-			return $value;
+		/**
+		 * The associative array key can only be a string or integer. The value can be any type. 
+		 *
+		 * Strings containing valid decimal ints, unless the number is preceded by a + sign, will be cast to the int type.
+		 * E.g. the key "8" will actually be stored under 8. On the other hand "08" will not be cast, as it isn't a valid
+		 * decimal integer.
+		 *
+		 * Floats are also cast to ints, which means that the fractional part will be truncated. E.g. the key 8.7 will
+		 * actually be stored under 8.
+		 *
+		 * Bools are cast to ints, too, i.e. the key true will actually be stored under 1 and the key false under 0.
+		 *
+		 * Null will be cast to the empty string, i.e. the key null will actually be stored under "".
+		 *
+		 * Arrays and objects can not be used as keys. Doing so will result in a warning: Illegal offset type.
+		 *
+		 * @see https://www.php.net/manual/en/language.types.array.php
+		 */
+		if ( is_string( $value ) ) {
 
-		} elseif ( is_string( $value ) ) {
-		
-			$key = strlen( $value ) > 32 ? md5( $value ) : $value;
+			$key = strlen( $value ) > 32 || is_numeric( $value ) ? md5( $value ) : $value;
 
-		} elseif ( is_int( $val ) || is_bool( $val ) ) {
+		} elseif ( is_int( $value ) ) {
 
 			$key = $value;
 
