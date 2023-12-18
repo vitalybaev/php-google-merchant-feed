@@ -159,11 +159,15 @@ class Product
 	 */
 	public function setAvailability($value)
 	{
-		if ( isset( Schema::MAP['availability'][$value] ) )
-			$value = Schema::MAP['availability'][$value];
+		if ( isset( Schema::MAP['availability'][$value] ) ) {
 
-		if ( ! in_array( $value, array( Availability::IN_STOCK, Availability::OUT_OF_STOCK, Availability::PREORDER, Availability::BACKORDER ) ) )
-			throw new InvalidArgumentException('Invalid \'availability\' value');
+			$value = Schema::MAP['availability'][$value];
+		}
+
+		if ( ! in_array( $value, array( Availability::IN_STOCK, Availability::OUT_OF_STOCK, Availability::PREORDER, Availability::BACKORDER ) ) ) {
+
+			throw new InvalidArgumentException( 'Invalid \'availability\' value = ' . var_export( $value, true ) );
+		}
 
 		$this->setAttribute('availability', $value, false);
 
@@ -337,11 +341,15 @@ class Product
 	 */
 	public function setCondition($value)
 	{
-		if ( isset( Schema::MAP['condition'][$value] ) )
-			$value = Schema::MAP['condition'][$value];
+		if ( isset( Schema::MAP['condition'][$value] ) ) {
 
-		if ( ! in_array( $value, array( Condition::NEW_PRODUCT, Condition::REFURBISHED, Condition::USED ) ) )
-			throw new InvalidArgumentException('Invalid \'condition\' value');
+			$value = Schema::MAP['condition'][$value];
+		}
+
+		if ( ! in_array( $value, array( Condition::NEW_PRODUCT, Condition::REFURBISHED, Condition::USED ) ) ) {
+
+			throw new InvalidArgumentException( 'Invalid \'condition\' value = ' . var_export( $value, true ) );
+		}
 
 		$this->setAttribute('condition', $value, false);
 
@@ -464,11 +472,15 @@ class Product
 	 */
 	public function addSizeType($value)
 	{
-		if ( isset( Schema::MAP['size_type'][$value] ) )
-			$value = Schema::MAP['size_type'][$value];
+		if ( isset( Schema::MAP['size_type'][$value] ) ) {
 
-		if ( ! in_array( $value, array( 'regular', 'petite', 'plus', 'tall', 'big', 'maternity' ) ) )
-			throw new InvalidArgumentException('Invalid \'size_type\' value');
+			$value = Schema::MAP['size_type'][$value];
+		}
+
+		if ( ! in_array( $value, array( 'regular', 'petite', 'plus', 'tall', 'big', 'maternity' ) ) ) {
+
+			throw new InvalidArgumentException( 'Invalid \'size_type\' value = ' . var_export( $value, true ) );
+		}
 
 		$this->addAttribute('size_type', $value, false);
 
@@ -489,11 +501,15 @@ class Product
 	 */
 	public function setSizeSystem($value)
 	{
-		if ( isset( Schema::MAP['size_system'][$value] ) )
-			$value = Schema::MAP['size_system'][$value];
+		if ( isset( Schema::MAP['size_system'][$value] ) ) {
 
-		if ( ! in_array( $value, array( 'AU', 'BR', 'CN', 'DE', 'EU', 'FR', 'IT', 'JP', 'MEX', 'UK', 'US' ) ) )
-			throw new InvalidArgumentException('Invalid \'size_system\' value');
+			$value = Schema::MAP['size_system'][$value];
+		}
+
+		if ( ! in_array( $value, array( 'AU', 'BR', 'CN', 'DE', 'EU', 'FR', 'IT', 'JP', 'MEX', 'UK', 'US' ) ) ) {
+
+			throw new InvalidArgumentException( 'Invalid \'size_system\' value = ' . var_export( $value, true ) );
+		}
 
 		$this->setAttribute('size_system', $value, false);
 
@@ -532,8 +548,10 @@ class Product
 	 */
 	public function setAgeGroup($value)
 	{
-		if ( ! in_array( $value, array( 'newborn', 'infant', 'toddler', 'kids', 'adult' ) ) )
-			throw new InvalidArgumentException('Invalid \'age_group\' value');
+		if ( ! in_array( $value, array( 'newborn', 'infant', 'toddler', 'kids', 'adult' ) ) ) {
+
+			throw new InvalidArgumentException( 'Invalid \'age_group\' value = ' . var_export( $value, true ) );
+		}
 
 		$this->setAttribute('age_group', $value, false);
 
@@ -595,11 +613,15 @@ class Product
 	 */
 	protected function sanitizeEnergyEfficiencyClass($value) {
 
-		if ( isset( Schema::MAP['energy_efficiency_class'][$value] ) )
-			$value = Schema::MAP['energy_efficiency_class'][$value];
+		if ( isset( Schema::MAP['energy_efficiency_class'][$value] ) ) {
 
-		if ( ! in_array( $value, array( 'A+++', 'A++', 'A+', 'A', 'B', 'C', 'D', 'E', 'F', 'G' ) ) )
-			throw new InvalidArgumentException('Invalid \'energy_efficiency_class\' value');
+			$value = Schema::MAP['energy_efficiency_class'][$value];
+		}
+
+		if ( ! in_array( $value, array( 'A+++', 'A++', 'A+', 'A', 'B', 'C', 'D', 'E', 'F', 'G' ) ) ) {
+
+			throw new InvalidArgumentException( 'Invalid \'energy_efficiency_class\' value = ' . var_export( $value, true ) );
+		}
 
 		return $value;
 	}
