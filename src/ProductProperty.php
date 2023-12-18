@@ -119,9 +119,17 @@ class ProductProperty
 	 */
 	private static function &getCache( $value )
 	{
-		if ( is_string( $value ) ) {
+		if ( null === $value ) {
+			
+			return $value;
+
+		} elseif ( is_string( $value ) ) {
 		
 			$key = strlen( $value ) > 32 ? md5( $value ) : $value;
+
+		} elseif ( is_int( $val ) || is_bool( $val ) ) {
+
+			$key = $value;
 
 		} else $key = md5( serialize( $value ) );
 
@@ -129,6 +137,8 @@ class ProductProperty
 
 			self::$cache[ $key ] = $value;
 		}
+
+		unset( $value );
 
 		return self::$cache[ $key ];
 	}
