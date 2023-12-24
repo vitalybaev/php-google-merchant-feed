@@ -16,28 +16,35 @@ class Feed
 	private $title;
 
 	/**
-	 * Link to the store
+	 * Link to the store.
 	 *
 	 * @var string
 	 */
 	private $link;
 
 	/**
-	 * Feed description
+	 * Feed description.
 	 *
 	 * @var string
 	 */
 	private $description;
 
 	/**
-	 * Feed items
+	 * Feed updated.
+	 *
+	 * @var string
+	 */
+	private $updated;
+
+	/**
+	 * Feed items.
 	 *
 	 * @var Product[]
 	 */
 	private $items = [];
 
 	/**
-	 * Rss version attribute
+	 * RSS version.
 	 *
 	 * @var string
 	 */
@@ -56,6 +63,7 @@ class Feed
 		$this->title       = $title;
 		$this->link        = $link;
 		$this->description = $description;
+		$this->updated     = date( 'c' );
 		$this->rssVersion  = $rssVersion;
 	}
 
@@ -117,6 +125,8 @@ class Feed
 				'description' => $this->description,
 			];
 		}
+
+		$xmlStructure[ 'channel' ][] = [ 'updated' => $this->updated ];
 
 		$namespace = '{' . static::GOOGLE_MERCHANT_XML_NAMESPACE . '}';
 
