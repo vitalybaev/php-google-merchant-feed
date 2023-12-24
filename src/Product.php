@@ -65,6 +65,19 @@ class Product
 	}
 
 	/**
+	 * Sets 'updated'.
+	 *
+	 * @param string $value
+	 * @return $this
+	 */
+	public function setUpdated($value)
+	{
+		$this->setAttribute('updated', $value, false);
+
+		return $this;
+	}
+
+	/**
 	 * Sets 'link'.
 	 *
 	 * @param string $url
