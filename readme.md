@@ -14,19 +14,17 @@ Run the Composer require command from the Terminal:
 ## Example
 
 ```php
-use Vitalybaev\GoogleMerchant\Feed;
+use Vitalybaev\GoogleMerchant\RssFeed;
 use Vitalybaev\GoogleMerchant\Product;
-use Vitalybaev\GoogleMerchant\Product\Availability;
-use Vitalybaev\GoogleMerchant\Product\Condition;
 use Vitalybaev\GoogleMerchant\Product\Shipping;
 
 // Create feed object
-$feed = new Feed("My awesome store", "https://example.com", "My awesome description");
+$feed = new RssFeed("My awesome store", "https://example.com", "My awesome description");
 
 // Put products to the feed ($products - some data from database for example)
 foreach ($products as $product) {
     $item = new Product();
-    
+
     // Set common product properties
     $item->setId($product->id);
     $item->setTitle($product->title);
@@ -34,15 +32,15 @@ foreach ($products as $product) {
     $item->setLink($product->getUrl());
     $item->setImage($product->getImage());
     if ($product->isAvailable()) {
-        $item->setAvailability(Availability::IN_STOCK);
+        $item->setAvailability('https://schema.org/InStock');
     } else {
-        $item->setAvailability(Availability::OUT_OF_STOCK);
+        $item->setAvailability('https://schema.org/OutOfStock');
     }
-    $item->setPrice("{$product->price} USD");
+    $item->setPrice($product->price.' USD');
     $item->setGoogleCategory($product->category_name);
     $item->setBrand($product->brand->name);
     $item->setGtin($product->barcode);
-    $item->setCondition(Condition::NEW_PRODUCT);
+    $item->setCondition('https://schema.org/NewCondition');
     
     // Some additional properties
     $item->setColor($product->color);
