@@ -7,11 +7,23 @@ use Sabre\Xml\Element\Cdata;
 trait HasProperties
 {
 	/**
+	 * RSS version.
+	 *
+	 * @var string
+	 */
+	private $rssVersion;
+
+	/**
 	 * Attributes
 	 *
 	 * @var ProductProperty[]
 	 */
 	private $attributes = [];
+
+	public function __construct($rssVersion = '')
+	{
+		$this->rssVersion  = $rssVersion;
+	}
 
 	/**
 	 * Sets attribute. If attribute is already exist, it would be overwritten.
@@ -29,8 +41,6 @@ trait HasProperties
 		$attributeName = strtolower( $name );
 
 		$this->attributes[ $attributeName ] = $productProperty;
-
-		return $this;
 	}
 
 	/**
@@ -58,43 +68,50 @@ trait HasProperties
 		}
 
 		$this->attributes[ $attributeName ][] = $productProperty;
-
-		return $this;
 	}
 
+
+        /**
+	 * @param $namespace
+	 * @return array
+	 */
 	/**
 	 * Returns structure of properties
 	 *
-	 * @param $namespace
-	 *
 	 * @return array
 	 */
-	public function getPropertiesXmlStructure( $namespace )
+	public function getPropertiesXmlStructure()
 	{
 		$result = [];
 
 		foreach ( $this->attributes as $attributeItem ) {
 
-			if ( is_object( $attributeItem ) && $attributeItem->getValue() instanceof PropertyBag ) {
+			if ( is_object( $attributeItem ) && $attributeItem instanceof PropertyBag ) {
 
 				$result[] = [
-				    'name'  => $namespace . $attributeItem->getName(),
-				    'value' => $attributeItem->getValue()->getPropertiesXmlStructure( $namespace ),
+				    'name'  => $attributeItem->getName(),
+				    'value' => $attributeItem->getValue()->getPropertiesXmlStructure(),
 				];
 
-				continue;
-			}
+			} else {
 
-			$attributes = is_array( $attributeItem ) ? $attributeItem : [ $attributeItem ];
+				$items = is_array( $attributeItem ) ? $attributeItem : [ $attributeItem ];
 
-			/** @var ProductProperty $attribute */
-			foreach ( $attributes as $attribute ) {
+				foreach ( $items as $item ) {
 
-				$result[] = $attribute->getXmlStructure( $namespace );
+					$result[] = $item->getXmlStructure();
+				}
 			}
 		}
 
 		return $result;
+	}
+
+	public function getXmlStructure()
+	{
+		return array(
+			'item' => $this->getPropertiesXmlStructure(),
+		);
 	}
 
 	/**

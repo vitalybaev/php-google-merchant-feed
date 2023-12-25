@@ -30,9 +30,7 @@ class Product extends GoogleProduct
 		if ( ! in_array( $value, array( Availability::IN_STOCK, Availability::OUT_OF_STOCK ) ) )
 			throw new InvalidArgumentException('Invalid \'availability\' value');
 
-	    $this->setAttribute('availability', $value, false);
-
-	    return $this;
+	    $this->setAttribute('g:availability', $value, false);
 	}
 
 	/**
@@ -43,9 +41,7 @@ class Product extends GoogleProduct
 	 */
 	public function addBrand($value)
 	{
-		$this->addAttribute('brand', $value, false);
-
-		return $this;
+		$this->addAttribute('g:brand', $value, false);
 	}
 
 	/**
@@ -62,8 +58,6 @@ class Product extends GoogleProduct
 		if ( ! in_array( $value, array( 'adult', 'all ages', 'teen', 'kids', 'toddler', 'infant', 'newborn' ) ) )
 			throw new InvalidArgumentException('Invalid \'age_group\' value');
 
-		$this->setAttribute('age_group', $value, false);
-
-		return $this;
+		$this->setAttribute('g:age_group', $value, false);
 	}
 }

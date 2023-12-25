@@ -4,10 +4,10 @@ namespace Vitalybaev\GoogleMerchant;
 
 use Sabre\Xml\Service as SabreXmlService;
 
-class Feed
-{
-	const GOOGLE_MERCHANT_XML_NAMESPACE = 'http://base.google.com/ns/1.0';
+const FEED_FORMAT='atom';
 
+class AtomFeed
+{
 	/**
 	 * Feed title.
 	 *
@@ -30,13 +30,6 @@ class Feed
 	private $description;
 
 	/**
-	 * Feed updated.
-	 *
-	 * @var string
-	 */
-	private $updated;
-
-	/**
 	 * Feed items.
 	 *
 	 * @var Product[]
@@ -44,27 +37,17 @@ class Feed
 	private $items = [];
 
 	/**
-	 * RSS version.
-	 *
-	 * @var string
-	 */
-	private $rssVersion;
-
-	/**
 	 * Feed constructor.
 	 *
 	 * @param string $title
 	 * @param string $link
 	 * @param string $description
-	 * @param string $rssVersion
 	 */
-	public function __construct($title, $link, $description, $rssVersion = '')
+	public function __construct($title, $link, $description)
 	{
 		$this->title       = $title;
 		$this->link        = $link;
 		$this->description = $description;
-		$this->updated     = date( 'c' );
-		$this->rssVersion  = $rssVersion;
 	}
 
 	/**
@@ -88,52 +71,35 @@ class Feed
 	}
 
 	/**
-	 * Set
-	 * @param $rssVersion
-	 */
-	public function setRssVersion($rssVersion)
-	{
-		$this->rssVersion = $rssVersion;
-	}
-
-	/**
 	 * Generate string representation of this feed.
 	 *
 	 * @return string
 	 */
 	public function build()
 	{
-		$xmlStructure = array( 'channel' => array() );
+		$xmlStructure = array();
 
 		if ( ! empty( $this->title ) ) {
 
-			$xmlStructure[ 'channel' ][] = [
-				'title' => $this->title,
-			];
+			$xmlStructure[] = [ 'title' => $this->title ];
 		}
 
 		if ( ! empty( $this->link ) ) {
 
-			$xmlStructure[ 'channel' ][] = [
-				'link' => $this->link,
-			];
+			$xmlStructure[] = [ 'link' => $this->link ];
 		}
 
 		if ( ! empty( $this->description ) ) {
 
-			$xmlStructure[ 'channel' ][] = [
-				'description' => $this->description,
-			];
+			$xmlStructure[] = [ 'description' => $this->description ];
 		}
 
-		$xmlStructure[ 'channel' ][] = [ 'updated' => $this->updated ];
-
-		$namespace = '{' . static::GOOGLE_MERCHANT_XML_NAMESPACE . '}';
+		$xmlStructure[] = [ 'updated' => date( 'c' ) ];
 
 		foreach ( $this->items as $num => $item ) {
-		
-			$xmlStructure[ 'channel' ][] = $item->getXmlStructure( $namespace );
-			
+
+			$xmlStructure[] = $item->getXmlStructure();
+
 			unset( $this->items[ $num ] );
 		}
 
@@ -141,8 +107,9 @@ class Feed
 
 		$xmlService = new SabreXmlService();
 
-		$xmlService->namespaceMap[ static::GOOGLE_MERCHANT_XML_NAMESPACE ] = 'g';
+		$xmlService->namespaceMap[ 'http://www.w3.org/2005/Atom' ]   = '';
+		$xmlService->namespaceMap[ 'http://base.google.com/ns/1.0' ] = 'g';
 
-		return $xmlService->write( 'rss', new RssElement( $xmlStructure, $this->rssVersion ) );
+		return $xmlService->write( 'feed', new RssElement( $xmlStructure ) );
 	}
 }

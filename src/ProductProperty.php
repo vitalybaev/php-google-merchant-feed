@@ -87,21 +87,20 @@ class ProductProperty
 	}
 
 	/**
-	 * @param $namespace
 	 * @return array
 	 */
-	public function getXmlStructure( $namespace )
+	public function getXmlStructure()
 	{
 		$value = $this->isCData() ? new Cdata( $this->getValue() ) : $this->getValue();
-		
+
 		if ( is_object( $value ) && $value instanceof PropertyBag ) {
 
-			$value = $value->getPropertiesXmlStructure( $namespace );
+			$value = $value->getPropertiesXmlStructure();
 		}
 
 		$xmlStruc = [];
 
-		$xmlStruc[ 'name' ]  =& self::getCache( $namespace . $this->getName() );
+		$xmlStruc[ 'name' ]  =& self::getCache( $this->getName() );
 		$xmlStruc[ 'value' ] =& self::getCache( $value );
 
 		return $xmlStruc;

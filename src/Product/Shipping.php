@@ -22,8 +22,7 @@ class Shipping
      */
     public function setCountry($countryCode)
     {
-        $this->setAttribute('country', $countryCode, false);
-        return $this;
+        $this->setAttribute('g:country', $countryCode, false);
     }
 
     /**
@@ -35,8 +34,7 @@ class Shipping
      */
     public function setRegion($region)
     {
-        $this->setAttribute('region', $region, false);
-        return $this;
+        $this->setAttribute('g:region', $region, false);
     }
 
     /**
@@ -48,8 +46,7 @@ class Shipping
      */
     public function setPostalCode($postalCode)
     {
-        $this->setAttribute('postal_code', $postalCode, false);
-        return $this;
+        $this->setAttribute('g:postal_code', $postalCode, false);
     }
 
     /**
@@ -61,8 +58,7 @@ class Shipping
      */
     public function setLocationId($locationId)
     {
-        $this->setAttribute('location_id', $locationId, false);
-        return $this;
+        $this->setAttribute('g:location_id', $locationId, false);
     }
 
     /**
@@ -74,8 +70,7 @@ class Shipping
      */
     public function setLocationGroupName($locationGroupName)
     {
-        $this->setAttribute('location_group_name', $locationGroupName, false);
-        return $this;
+        $this->setAttribute('g:location_group_name', $locationGroupName, false);
     }
 
     /**
@@ -87,8 +82,7 @@ class Shipping
      */
     public function setService($service)
     {
-        $this->setAttribute('service', $service, false);
-        return $this;
+        $this->setAttribute('g:service', $service, false);
     }
 
     /**
@@ -100,7 +94,6 @@ class Shipping
      */
     public function setPrice($price)
     {
-        $this->setAttribute('price', $price, false);
-        return $this;
+        $this->setAttribute('g:price', $price, false);
     }
 }

@@ -4,7 +4,6 @@ namespace Vitalybaev\GoogleMerchant;
 
 class RssElement implements \Sabre\Xml\XmlSerializable
 {
-
 	private $value;
 
 	/**

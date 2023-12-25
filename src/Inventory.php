@@ -17,8 +17,7 @@ class Inventory
 	 */
 	public function setTargetCustomerId($value)
 	{
-		$this->setAttribute('target_customer_id', $value);
-		return $this;
+		$this->setAttribute('g:target_customer_id', $value);
 	}
 
 	/**
@@ -34,8 +33,7 @@ class Inventory
 	 */
 	public function setStoreCode($value)
 	{
-		$this->setAttribute('store_code', $value);
-		return $this;
+		$this->setAttribute('g:store_code', $value);
 	}
 
 	/**
@@ -50,8 +48,7 @@ class Inventory
 	 */
 	public function setId($value)
 	{
-		$this->setAttribute('id', $value);
-		return $this;
+		$this->setAttribute('g:id', $value);
 	}
 
 	/**
@@ -65,8 +62,7 @@ class Inventory
 	 */
 	public function setGtin($value)
 	{
-		$this->setAttribute('gtin', $value, false);
-		return $this;
+		$this->setAttribute('g:gtin', $value, false);
 	}
 
 	/**
@@ -80,8 +76,7 @@ class Inventory
 	 */
 	public function addGtin($value)
 	{
-		$this->addAttribute('gtin', $value, false);
-		return $this;
+		$this->addAttribute('g:gtin', $value, false);
 	}
 
 	/**
@@ -95,8 +90,7 @@ class Inventory
 	 */
 	public function setQuantity($value)
 	{
-		$this->setAttribute('quantity', $value, false);
-		return $this;
+		$this->setAttribute('g:quantity', $value, false);
 	}
 
 	/**
@@ -110,8 +104,7 @@ class Inventory
 	 */
 	public function setPrice($value)
 	{
-		$this->setAttribute('price', $value, false);
-		return $this;
+		$this->setAttribute('g:price', $value, false);
 	}
 
 	/**
@@ -125,20 +118,6 @@ class Inventory
 	 */
 	public function setTimestamp($value)
 	{
-		$this->setAttribute('timestamp', $value, false);
-		return $this;
-	}
-
-	/**
-	 * @param $namespace
-	 * @return array
-	 */
-	public function getXmlStructure($namespace)
-	{
-		$xmlStructure = array(
-			'item' => $this->getPropertiesXmlStructure($namespace),
-		);
-
-		return $xmlStructure;
+		$this->setAttribute('g:timestamp', $value, false);
 	}
 }
