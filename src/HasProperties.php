@@ -109,9 +109,11 @@ trait HasProperties
 
 	public function getXmlStructure()
 	{
-		return array(
-			'item' => $this->getPropertiesXmlStructure(),
-		);
+		if ( 'atom' === \Vitalybaev\GoogleMerchant\FEED_FORMAT ) {
+
+			return array( 'entry' => $this->getPropertiesXmlStructure() );
+
+		} else return array( 'item' => $this->getPropertiesXmlStructure() );
 	}
 
 	/**
