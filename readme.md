@@ -23,6 +23,7 @@ $feed = new RssFeed("My awesome store", "https://example.com", "My awesome descr
 
 // Put products to the feed ($products - some data from database for example)
 foreach ($products as $product) {
+
     $item = new Product();
 
     // Set common product properties
@@ -31,11 +32,13 @@ foreach ($products as $product) {
     $item->setDescription($product->description);
     $item->setLink($product->getUrl());
     $item->setImage($product->getImage());
+
     if ($product->isAvailable()) {
         $item->setAvailability('https://schema.org/InStock');
     } else {
         $item->setAvailability('https://schema.org/OutOfStock');
     }
+
     $item->setPrice($product->price.' USD');
     $item->setGoogleCategory($product->category_name);
     $item->setBrand($product->brand->name);
