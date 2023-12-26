@@ -7,11 +7,11 @@ use Sabre\Xml\Element\Cdata;
 trait HasProperties
 {
 	/**
-	 * RSS version.
+	 * Feed format.
 	 *
 	 * @var string
 	 */
-	private $rssVersion;
+	private $format;
 
 	/**
 	 * Attributes
@@ -20,9 +20,9 @@ trait HasProperties
 	 */
 	private $attributes = [];
 
-	public function __construct($rssVersion = '')
+	public function __construct($format = 'rss')
 	{
-		$this->rssVersion  = $rssVersion;
+		$this->format = $format;
 	}
 
 	/**
@@ -109,7 +109,7 @@ trait HasProperties
 
 	public function getXmlStructure()
 	{
-		if ( defined( '\Vitalybaev\GoogleMerchant\ATOM_FEED' ) && ATOM_FEED ) {
+		if ( 'atom' === $this->format ) {
 
 			return array( 'entry' => $this->getPropertiesXmlStructure() );
 

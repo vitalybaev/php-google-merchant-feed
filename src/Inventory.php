@@ -4,7 +4,7 @@ namespace Vitalybaev\GoogleMerchant;
 
 class Inventory
 {
-	use HasProperties;
+	use \Vitalybaev\GoogleMerchant\HasProperties;
 
 	/**
 	 * Sets 'target_customer_id'.

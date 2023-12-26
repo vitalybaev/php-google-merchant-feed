@@ -4,7 +4,7 @@ namespace Vitalybaev\GoogleMerchant;
 
 class PropertyBag
 {
-	use HasProperties;
+	use \Vitalybaev\GoogleMerchant\HasProperties;
 
 	/**
 	 * Property name
