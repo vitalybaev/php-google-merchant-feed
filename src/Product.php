@@ -64,7 +64,7 @@ class Product
 	 */
 	public function setUpdated($value)
 	{
-		if ( 'atom' === \Vitalybaev\GoogleMerchant\FEED_FORMAT ) {
+		if ( defined( '\Vitalybaev\GoogleMerchant\ATOM_FEED' ) && ATOM_FEED ) {
 
 			$this->setAttribute('updated', $value, false);
 		}

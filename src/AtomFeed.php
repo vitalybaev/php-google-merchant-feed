@@ -4,7 +4,7 @@ namespace Vitalybaev\GoogleMerchant;
 
 use Sabre\Xml\Service as SabreXmlService;
 
-const FEED_FORMAT='atom';
+const ATOM_FEED = true;
 
 class AtomFeed
 {

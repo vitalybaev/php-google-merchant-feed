@@ -4,78 +4,14 @@ namespace Vitalybaev\GoogleMerchant;
 
 use Sabre\Xml\Service as SabreXmlService;
 
-const FEED_FORMAT='rss';
-
-class RssFeed
+class RssFeed extends Feed
 {
-	/**
-	 * Feed title.
-	 *
-	 * @var string
-	 */
-	private $title;
-
-	/**
-	 * Link to the store.
-	 *
-	 * @var string
-	 */
-	private $link;
-
-	/**
-	 * Feed description.
-	 *
-	 * @var string
-	 */
-	private $description;
-
-	/**
-	 * Feed items.
-	 *
-	 * @var Product[]
-	 */
-	private $items = [];
-
 	/**
 	 * RSS version.
 	 *
 	 * @var string
 	 */
 	private $rssVersion = '2.0';
-
-	/**
-	 * Feed constructor.
-	 *
-	 * @param string $title
-	 * @param string $link
-	 * @param string $description
-	 */
-	public function __construct($title, $link, $description)
-	{
-		$this->title       = $title;
-		$this->link        = $link;
-		$this->description = $description;
-	}
-
-	/**
-	 * Adds product (aka item) to feed.
-	 *
-	 * @param $product
-	 */
-	public function addProduct($product)
-	{
-		$this->addItem($product);
-	}
-
-	/**
-	 * Adds item to feed.
-	 *
-	 * @param $product
-	 */
-	public function addItem($item)
-	{
-		$this->items[] = $item;
-	}
 
 	/**
 	 * Generate string representation of this feed.
