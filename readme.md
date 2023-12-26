@@ -13,12 +13,12 @@ Run the Composer require command from the Terminal:
 ## Example
 
 ```php
-use Vitalybaev\GoogleMerchant\AtomFeed;
+use Vitalybaev\GoogleMerchant\Feed;
 use Vitalybaev\GoogleMerchant\Product;
 use Vitalybaev\GoogleMerchant\Product\Shipping;
 
 // Create the feed object.
-$feed = new AtomFeed("My awesome store", "https://example.com", "My awesome description");
+$feed = new Feed("My awesome store", "https://example.com", "My awesome description");
 
 // Add products to the feed.
 foreach ($products as $num => $product) {
