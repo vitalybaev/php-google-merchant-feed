@@ -104,7 +104,7 @@ class Feed
 
 		} else return $this->build_rss();
 	}
-	
+
 	private function build_atom()
 	{
 		$xmlStructure = array();
