@@ -6,102 +6,135 @@ use Sabre\Xml\Element\Cdata;
 
 trait HasProperties
 {
-    /**
-     * Attributes
-     *
-     * @var ProductProperty[]
-     */
-    private $attributes = [];
+	/**
+	 * Feed format.
+	 *
+	 * @var string
+	 */
+	private $format;
 
-    /**
-     * Sets attribute. If attribute is already exist, it would be overwritten.
-     *
-     * @param string $name
-     * @param string $value
-     * @param bool   $isCData
-     *
-     * @return self
-     */
-    public function setAttribute($name, $value, $isCData = false)
-    {
-        $productProperty = new ProductProperty($name, $value, $isCData);
-        $this->attributes[strtolower($name)] = $productProperty;
+	/**
+	 * Attributes
+	 *
+	 * @var ProductProperty[]
+	 */
+	private $attributes = [];
 
-        return $this;
-    }
+	public function __construct($format = 'rss')
+	{
+		$this->format = $format;
+	}
 
-    /**
-     * Adds attribute. Doesn't overwrite previous attributes.
-     *
-     * @param      $name
-     * @param      $value
-     * @param bool $isCData
-     *
-     * @return self
-     */
-    public function addAttribute($name, $value, $isCData = false)
-    {
-        $productProperty = new ProductProperty($name, $value, $isCData);
-        $attributeName = strtolower($name);
-        if (!isset($this->attributes[$attributeName])) {
-            $this->attributes[$attributeName] = [$productProperty];
-            return $this;
-        }
+	/**
+	 * Sets attribute. If attribute is already exist, it would be overwritten.
+	 *
+	 * @param string $name
+	 * @param string $value
+	 * @param bool   $isCData
+	 *
+	 * @return self
+	 */
+	public function setAttribute( $name, $value, $isCData = false )
+	{
+		$productProperty =& ProductProperty::getInstance( $name, $value, $isCData );
 
-        if (!is_array($this->attributes[$attributeName])) {
-            $this->attributes[$attributeName] = [$this->attributes[$attributeName], $productProperty];
-            return $this;
-        }
+		$attributeName = strtolower( $name );
 
-        $this->attributes[$attributeName][] = $productProperty;
-        return $this;
-    }
+		$this->attributes[ $attributeName ] = $productProperty;
+	}
 
-    /**
-     * Returns structure of properties
-     *
-     * @param $namespace
-     *
-     * @return array
-     */
-    public function getPropertiesXmlStructure($namespace)
-    {
-        $result = [];
+	/**
+	 * Adds attribute. Doesn't overwrite previous attributes.
+	 *
+	 * @param      $name
+	 * @param      $value
+	 * @param bool $isCData
+	 *
+	 * @return self
+	 */
+	public function addAttribute( $name, $value, $isCData = false )
+	{
+		$productProperty =& ProductProperty::getInstance( $name, $value, $isCData );
 
-        foreach ($this->attributes as $attributeItem) {
-            if (is_object($attributeItem) && $attributeItem->getValue() instanceof PropertyBag) {
-                $result[] = [
-                    'name' => $namespace . $attributeItem->getName(),
-                    'value' => $attributeItem->getValue()->getPropertiesXmlStructure($namespace),
-                ];
+		$attributeName = strtolower( $name );
 
-                continue;
-            }
+		if ( ! isset( $this->attributes[ $attributeName ] ) ) {
 
-            $attributes = is_array($attributeItem) ? $attributeItem : [$attributeItem];
-            /** @var ProductProperty $attribute */
-            foreach ($attributes as $attribute) {
-                $result[] = $attribute->getXmlStructure($namespace);
-            }
-        }
+			$this->attributes[ $attributeName ] = [];
 
-        return $result;
-    }
+		} elseif ( ! is_array( $this->attributes[ $attributeName ] ) ) {
 
-    /**
-     * @return PropertyBag
-     */
-    public function getPropertyBag()
-    {
-        $propertyBag = new PropertyBag();
-        foreach ($this->attributes as $attributeItem) {
-            $attributes = is_array($attributeItem) ? $attributeItem : [$attributeItem];
-            foreach ($attributes as $attribute) {
-                $value = $attribute->isCData() ? new Cdata($attribute->getValue()) : $attribute->getValue();
-                $propertyBag->addAttribute($attribute->getName(), $value, $attribute->isCData());
-            }
-        }
+			$this->attributes[ $attributeName ] = [ $this->attributes[ $attributeName ] ];
+		}
 
-        return $propertyBag;
-    }
+		$this->attributes[ $attributeName ][] = $productProperty;
+	}
+
+
+        /**
+	 * @param $namespace
+	 * @return array
+	 */
+	/**
+	 * Returns structure of properties
+	 *
+	 * @return array
+	 */
+	public function getPropertiesXmlStructure()
+	{
+		$result = [];
+
+		foreach ( $this->attributes as $attributeItem ) {
+
+			if ( is_object( $attributeItem ) && $attributeItem instanceof PropertyBag ) {
+
+				$result[] = [
+				    'name'  => $attributeItem->getName(),
+				    'value' => $attributeItem->getValue()->getPropertiesXmlStructure(),
+				];
+
+			} else {
+
+				$items = is_array( $attributeItem ) ? $attributeItem : [ $attributeItem ];
+
+				foreach ( $items as $item ) {
+
+					$result[] = $item->getXmlStructure();
+				}
+			}
+		}
+
+		return $result;
+	}
+
+	public function getXmlStructure()
+	{
+		if ( 'atom' === $this->format ) {
+
+			return array( 'entry' => $this->getPropertiesXmlStructure() );
+
+		} else return array( 'item' => $this->getPropertiesXmlStructure() );
+	}
+
+	/**
+	 * @return PropertyBag
+	 */
+	public function getPropertyBag()
+	{
+		$propertyBag = new PropertyBag();
+
+		foreach ( $this->attributes as $attributeItem ) {
+
+			$attributes = is_array( $attributeItem ) ? $attributeItem : [ $attributeItem ];
+
+			foreach ( $attributes as $attribute ) {
+
+				$value = $attribute->isCData() ? new Cdata( $attribute->getValue() ) : $attribute->getValue();
+
+				$propertyBag->addAttribute( $attribute->getName(), $value, $attribute->isCData() );
+			}
+		}
+
+		return $propertyBag;
+	}
 }
