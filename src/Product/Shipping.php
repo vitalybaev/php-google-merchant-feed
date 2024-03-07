@@ -103,4 +103,56 @@ class Shipping
         $this->setAttribute('price', $price, false);
         return $this;
     }
+
+    /**
+     * Sets minimum handling time.
+     *
+     * @param string $minHandlingTime
+     *
+     * @return $this
+     */
+    public function setMinHandlingTime($minHandlingTime)
+    {
+        $this->setAttribute('min_handling_time', $minHandlingTime, false);
+        return $this;
+    }
+
+    /**
+     * Sets maximum handling time.
+     *
+     * @param string $maxHandlingTime
+     *
+     * @return $this
+     */
+    public function setMaxHandlingTime($maxHandlingTime)
+    {
+        $this->setAttribute('max_handling_time', $maxHandlingTime, false);
+        return $this;
+    }
+
+    /**
+     * Sets minimum transit time.
+     *
+     * @param string $minTransitTime
+     *
+     * @return $this
+     */
+    public function setMinTransitTime($minTransitTime)
+    {
+        $this->setAttribute('min_transit_time', $minTransitTime, false);
+        return $this;
+    }
+
+    /**
+     * Sets maximum transit time.
+     *
+     * @param string $maxTransitTime
+     *
+     * @return $this
+     */
+    public function setMaxTransitTime($maxTransitTime)
+    {
+        $this->setAttribute('max_transit_time', $maxTransitTime, false);
+        return $this;
+    }
 }
