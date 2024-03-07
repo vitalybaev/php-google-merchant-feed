@@ -413,6 +413,66 @@ class Product
     }
 
     /**
+     * Set the country from which the product will be dispatched.
+     *
+     * @see https://support.google.com/merchants/answer/9837936
+     *
+     * @param string $str
+     *
+     * @return $this
+     */
+    public function setShipsFromCountry($str)
+    {
+        $this->setAttribute('ships_from_country', $str, false);
+        return $this;
+    }
+
+    /**
+     * Sets minimum handling time.
+     *
+     * @see https://support.google.com/merchants/answer/7388496
+     *
+     * @param string $str
+     *
+     * @return $this
+     */
+    public function setMinHandlingTime($str)
+    {
+        $this->setAttribute('min_handling_time', $str, false);
+        return $this;
+    }
+
+    /**
+     * Sets maximum handling time.
+     *
+     * @see https://support.google.com/merchants/answer/7388496
+     *
+     * @param string $str
+     *
+     * @return $this
+     */
+    public function setMaxHandlingTime($str)
+    {
+        $this->setAttribute('max_handling_time', $str, false);
+        return $this;
+    }
+
+    /**
+     * Set a transit time label.
+     *
+     * @see https://support.google.com/merchants/answer/9298965
+     *
+     * @param string $str
+     *
+     * @return $this
+     */
+    public function setTransitTimeLabel($str)
+    {
+        $this->setAttribute('transit_time_label', $str, false);
+        return $this;
+    }
+
+    /**
      * Set a custom label
      * 
      * @param string $str
