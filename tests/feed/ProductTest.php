@@ -227,4 +227,52 @@ class ProductTest extends TestCase
 
         $this->assertEquals($expectedFeedXml, $feedXml);
     }
+
+    /**
+     *  Tests nested attributes.
+     */
+    public function testNestedAttrubites()
+    {
+        $product = new Product();
+        $product->setNestedAttribute(
+          'brands',
+          ['brand' => ['VW', 'KIA'], 'dummy' => ['dummy', 'dummy']]
+
+        );
+        $product->addNestedAttribute(
+          'brands',
+          ['brand' => ['VW', 'KIA']],
+          TRUE
+        );
+
+        // Create feed object
+        $feed = new Feed("My awesome store", "https://example.com", "My awesome description");
+        $feed->setRssVersion("1.0");
+        $feed->addProduct($product);
+
+        $feedXml = $feed->build();
+        $expectedFeedXml = '<?xml version="1.0"?>
+<rss xmlns:g="http://base.google.com/ns/1.0" version="1.0">
+ <channel>
+  <title>My awesome store</title>
+  <link>https://example.com</link>
+  <description>My awesome description</description>
+  <item>
+   <g:brands>
+    <g:brand>VW</g:brand>
+    <g:brand>KIA</g:brand>
+    <g:dummy>dummy</g:dummy>
+    <g:dummy>dummy</g:dummy>
+   </g:brands>
+   <g:brands>
+    <g:brand><![CDATA[VW]]></g:brand>
+    <g:brand><![CDATA[KIA]]></g:brand>
+   </g:brands>
+  </item>
+ </channel>
+</rss>
+';
+
+        $this->assertEquals($expectedFeedXml, $feedXml);
+    }
 }
