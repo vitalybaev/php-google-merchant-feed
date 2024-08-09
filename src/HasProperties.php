@@ -58,6 +58,50 @@ trait HasProperties
     }
 
     /**
+     * Sets nested attribute. If attribute is already exist, it would be overwritten.
+     *
+     * @param string $name
+     * @param array  $value
+     * @param bool   $isCData
+     *
+     * @return self
+     */
+    public function setNestedAttribute($name, $value, $isCData = false)
+    {
+        $productNestedProperty = new ProductNestedProperty($name, $value, $isCData);
+        $this->attributes[strtolower($name)] = $productNestedProperty;
+
+        return $this;
+    }
+
+    /**
+     * Adds nested attribute. Doesn't overwrite previous attributes.
+     *
+     * @param      $name
+     * @param      $value
+     * @param bool $isCData
+     *
+     * @return self
+     */
+    public function addNestedAttribute($name, $value, $isCData = false)
+    {
+        $productProperty = new ProductNestedProperty($name, $value, $isCData);
+        $attributeName = strtolower($name);
+        if (!isset($this->attributes[$attributeName])) {
+            $this->attributes[$attributeName] = [$productProperty];
+            return $this;
+        }
+
+        if (!is_array($this->attributes[$attributeName])) {
+            $this->attributes[$attributeName] = [$this->attributes[$attributeName], $productProperty];
+            return $this;
+        }
+
+        $this->attributes[$attributeName][] = $productProperty;
+        return $this;
+    }
+
+    /**
      * Returns structure of properties
      *
      * @param $namespace
@@ -97,6 +141,11 @@ trait HasProperties
         foreach ($this->attributes as $attributeItem) {
             $attributes = is_array($attributeItem) ? $attributeItem : [$attributeItem];
             foreach ($attributes as $attribute) {
+                if ($attribute instanceof ProductNestedProperty) {
+                    $structure = $attribute->getXmlStructure('');
+                    $propertyBag->addNestedAttribute($structure['name'], $structure['value'], $attribute->isCData());
+                    continue;
+                }
                 $value = $attribute->isCData() ? new Cdata($attribute->getValue()) : $attribute->getValue();
                 $propertyBag->addAttribute($attribute->getName(), $value, $attribute->isCData());
             }
