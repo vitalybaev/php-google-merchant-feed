@@ -10,8 +10,9 @@
     }
   ],
   "require": {
-    "php": ">=5.5",
-    "sabre/xml": "^1.5 || ^2.0"
+    "php": ">=7.4.33",
+    "sabre/uri": ">=3.0.2",
+    "sabre/xml": ">=4.0.6"
   },
   "autoload": {
     "psr-4": {

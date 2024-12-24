@@ -6,114 +6,175 @@ use Sabre\Xml\Service as SabreXmlService;
 
 class Feed
 {
-    const GOOGLE_MERCHANT_XML_NAMESPACE = 'http://base.google.com/ns/1.0';
+	/**
+	 * Feed title.
+	 *
+	 * @var string
+	 */
+	private $title;
 
-    /**
-     * Feed title.
-     *
-     * @var string
-     */
-    private $title;
+	/**
+	 * Link to the store.
+	 *
+	 * @var string
+	 */
+	private $link;
 
-    /**
-     * Link to the store
-     *
-     * @var string
-     */
-    private $link;
+	/**
+	 * Feed description.
+	 *
+	 * @var string
+	 */
+	private $description;
 
-    /**
-     * Feed description
-     *
-     * @var string
-     */
-    private $description;
+	/**
+	 * Feed format.
+	 *
+	 * @var string
+	 */
+	private $format;
 
-    /**
-     * Feed items
-     *
-     * @var Product[]
-     */
-    private $items = [];
+	/**
+	 * RSS version.
+	 *
+	 * @var string
+	 */
+	private $rssVersion = '2.0';
 
-    /**
-     * Rss version attribute
-     *
-     * @var string
-     */
-    private $rssVersion;
+	/**
+	 * Feed items.
+	 *
+	 * @var Product[]
+	 */
+	private $items = [];
 
-    /**
-     * Feed constructor.
-     *
-     * @param string $title
-     * @param string $link
-     * @param string $description
-     * @param string $rssVersion
-     */
-    public function __construct($title, $link, $description, $rssVersion = "")
-    {
-        $this->title = $title;
-        $this->link = $link;
-        $this->description = $description;
-        $this->rssVersion = $rssVersion;
-    }
+	/**
+	 * Feed constructor.
+	 *
+	 * @param string $title
+	 * @param string $link
+	 * @param string $description
+	 */
+	public function __construct($title, $link, $description, $format = 'rss')
+	{
+		$this->title       = $title;
+		$this->link        = $link;
+		$this->description = $description;
+		$this->format      = $format;
+	}
 
-    /**
-     * Adds product to feed.
-     *
-     * @param $product
-     */
-    public function addProduct($product)
-    {
-        $this->items[] = $product;
-    }
+	/**
+	 * Get the feed format.
+	 */
+	public function getFormat()
+	{
+		return $this->format;
+	}
 
-    /**
-     * Set
-     * @param $rssVersion
-     */
-    public function setRssVersion($rssVersion)
-    {
-        $this->rssVersion = $rssVersion;
-    }
+	/**
+	 * Adds product (aka item) to the feed.
+	 *
+	 * @param $product
+	 */
+	public function addProduct($product)
+	{
+		$this->addItem($product);
+	}
 
-    /**
-     * Generate string representation of this feed.
-     *
-     * @return string
-     */
-    public function build()
-    {
-        $xmlService = new SabreXmlService();
+	/**
+	 * Adds item to the feed.
+	 *
+	 * @param $product
+	 */
+	public function addItem($item)
+	{
+		$this->items[] = $item;
+	}
 
-        $namespace = '{'.static::GOOGLE_MERCHANT_XML_NAMESPACE.'}';
-        $xmlService->namespaceMap[static::GOOGLE_MERCHANT_XML_NAMESPACE] = 'g';
+	/**
+	 * Generate string representation of this feed.
+	 *
+	 * @return string
+	 */
+	public function build()
+	{
+		if ( 'atom' === $this->format ) {
 
-        $xmlStructure = array('channel' => array());
+			return $this->build_atom();
 
-        if (!empty($this->title)) {
-            $xmlStructure['channel'][] = [
-                'title' => $this->title,
-            ];
-        }
+		} else return $this->build_rss();
+	}
 
-        if (!empty($this->link)) {
-            $xmlStructure['channel'][] = [
-                'link' => $this->link,
-            ];
-        }
+	private function build_atom()
+	{
+		$xmlStructure = array();
 
-        if (!empty($this->description)) {
-            $xmlStructure['channel'][] = [
-                'description' => $this->description,
-            ];
-        }
+		if ( ! empty( $this->title ) ) {
 
-        foreach ($this->items as $item) {
-            $xmlStructure['channel'][] = $item->getXmlStructure($namespace);
-        }
+			$xmlStructure[] = [ 'title' => $this->title ];
+		}
 
-        return $xmlService->write('rss', new RssElement($xmlStructure, $this->rssVersion));
-    }
+		if ( ! empty( $this->link ) ) {
+
+			$xmlStructure[] = [ 'link' => $this->link ];
+		}
+
+		if ( ! empty( $this->description ) ) {
+
+			$xmlStructure[] = [ 'description' => $this->description ];
+		}
+
+		$xmlStructure[] = [ 'updated' => date( 'c' ) ];
+
+		foreach ( $this->items as $num => $item ) {
+
+			$xmlStructure[] = $item->getXmlStructure();
+
+			unset( $this->items[ $num ] );
+		}
+
+		$this->items = [];
+
+		$xmlService = new SabreXmlService();
+
+		$xmlService->namespaceMap[ 'http://www.w3.org/2005/Atom' ]   = '';
+		$xmlService->namespaceMap[ 'http://base.google.com/ns/1.0' ] = 'g';
+
+		return $xmlService->write( 'feed', new RssElement( $xmlStructure ) );
+	}
+
+	private function build_rss()
+	{
+		$xmlStructure = array( 'channel' => array() );
+
+		if ( ! empty( $this->title ) ) {
+
+			 $xmlStructure[ 'channel' ][] = [ 'title' => $this->title ];
+		}
+
+		if ( ! empty( $this->link ) ) {
+
+			 $xmlStructure[ 'channel' ][] = [ 'link' => $this->link ];
+		}
+
+		if ( ! empty( $this->description ) ) {
+
+			 $xmlStructure[ 'channel' ][] = [ 'description' => $this->description ];
+		}
+
+		foreach ( $this->items as $num => $item ) {
+
+			 $xmlStructure[ 'channel' ][] = $item->getXmlStructure();
+
+			unset( $this->items[ $num ] );
+		}
+
+		$this->items = [];
+
+		$xmlService = new SabreXmlService();
+
+		$xmlService->namespaceMap[ 'http://base.google.com/ns/1.0' ] = 'g';
+
+		return $xmlService->write( 'rss', new RssElement( $xmlStructure, $this->rssVersion ) );
+	}
 }

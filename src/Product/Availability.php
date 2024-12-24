@@ -1,6 +1,6 @@
 <?php
 
-namespace Vitalybaev\GoogleMerchant\Product\Availability;
+namespace Vitalybaev\GoogleMerchant\Product;
 
 class Availability
 {
@@ -9,6 +9,6 @@ class Availability
     const OUT_OF_STOCK = 'out_of_stock';
 
     const PREORDER = 'preorder';
-    
+
     const BACKORDER = 'backorder';
 }
